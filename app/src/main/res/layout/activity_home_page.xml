@@ -42,7 +42,7 @@
                     app:tabBackground="@drawable/tab_selectdback"
                     app:tabGravity="fill"
                     app:tabIndicatorColor="@android:color/transparent"
-                    app:tabMode="fixed" />
+                    app:tabMode="scrollable" />
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.viewpager.widget.ViewPager

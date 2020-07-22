@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.project.numerojyotish.Activity.BasicInfoActivity;
 import com.project.numerojyotish.Fragment.AntardashaFragment;
 import com.project.numerojyotish.Fragment.DashaFragment;
 import com.project.numerojyotish.Interface.ApiInterface;
@@ -39,7 +40,7 @@ public class ApiClass implements ApiInterface
 
 
 
-    public void getHomeData(Context context) {
+    public void getHomeData(Context context, final String from) {
         session = new SessionManager(context);
         progressDialog = new ProgressDialog(context);
         requestQueue = Volley.newRequestQueue(context);
@@ -48,9 +49,9 @@ public class ApiClass implements ApiInterface
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-       // String url= EndPoints.LOAD_DATA+"?dob="+"12-02-1990"+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME);
+        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST,EndPoints.LOAD_DATA,
+        StringRequest postRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -61,6 +62,10 @@ public class ApiClass implements ApiInterface
                         // {"id":1,"status":"success","WalletAmount":542.64}
                         try {
                             JSONObject obj = new JSONObject(response);
+
+
+                                BasicInfoActivity.getInstance().runThread(response);
+
 
 
                         } catch (JSONException e) {
@@ -75,20 +80,20 @@ public class ApiClass implements ApiInterface
                         progressDialog.dismiss();
                     }
                 }
-        )
-        {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                //  params.put("dob", session.getBasicDetails().get(SessionManager.KEY_DOB));
-                params.put("dob", "12-02-1990");
-
-                params.put("gender",session.getBasicDetails().get(SessionManager.KEY_GENDER));
-                params.put("name", session.getBasicDetails().get(SessionManager.KEY_NAME));
-
-                Log.e("params", params + "");
-                return params;
-            }
+        );
+//        {
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<>();
+//                //  params.put("dob", session.getBasicDetails().get(SessionManager.KEY_DOB));
+//                params.put("dob", "12-02-1990");
+//
+//                params.put("gender",session.getBasicDetails().get(SessionManager.KEY_GENDER));
+//                params.put("name", session.getBasicDetails().get(SessionManager.KEY_NAME));
+//
+//                Log.e("params", params + "");
+//                return params;
+//            }
 //
 //            @Override
 //            public Map<String, String> getHeaders() throws AuthFailureError {
@@ -96,7 +101,7 @@ public class ApiClass implements ApiInterface
 //                params.put("Content-Type", "application/x-www-form-urlencoded");
 //                return params;
 //            }
-        };
+ //       };
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);

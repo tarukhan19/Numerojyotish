@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
             {
 
                 if (session.isLoggedIn()) {
-//                    Intent intent=new Intent(MainActivity.this, HomeActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-//                    overridePendingTransition(R.anim.trans_left_in,
-//                            R.anim.trans_left_out);
-//                    finish();
+                    Intent intent=new Intent(MainActivity.this, BasicInfoActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.trans_left_in,
+                            R.anim.trans_left_out);
+                    finish();
                 }
                 else
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));

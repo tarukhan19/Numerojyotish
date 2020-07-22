@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.project.numerojyotish.Fragment.AntardashaFragment;
 import com.project.numerojyotish.Fragment.BasicInfoFragment;
 import com.project.numerojyotish.Fragment.DashaFragment;
+import com.project.numerojyotish.Fragment.PartyantarDashaFragment;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.session.SessionManager;
 
@@ -77,12 +78,20 @@ public class HomePageActivity extends AppCompatActivity {
         tabThree.setTextSize(15);
         tabLayout.getTabAt(0).setCustomView(tabThree);
 
-               TextView tabOne = (TextView)
+        TextView tabFour = (TextView)
+                LayoutInflater.from(this).inflate(R.layout.custom_tab, tabLayout, false);
+        tabFour.setText("Partyantar Dasha");
+        tabFour.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
+        tabFour.setTextSize(15);
+        tabLayout.getTabAt(1).setCustomView(tabFour);
+
+
+        TextView tabOne = (TextView)
                 LayoutInflater.from(this).inflate(R.layout.custom_tab, tabLayout, false);
         tabOne.setText("Dasha");
         tabOne.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
         tabOne.setTextSize(15);
-        tabLayout.getTabAt(1).setCustomView(tabOne);
+        tabLayout.getTabAt(2).setCustomView(tabOne);
 
 
         TextView tabTwo = (TextView)
@@ -90,7 +99,7 @@ public class HomePageActivity extends AppCompatActivity {
         tabTwo.setText("Antardasha");
         tabTwo.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
         tabTwo.setTextSize(15);
-        tabLayout.getTabAt(2).setCustomView(tabTwo);
+        tabLayout.getTabAt(3).setCustomView(tabTwo);
 
 
     }
@@ -99,6 +108,8 @@ public class HomePageActivity extends AppCompatActivity {
     {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new BasicInfoFragment(), "Basic Info");
+        adapter.addFragment(new PartyantarDashaFragment(), "Partyantar Dasha");
+
         adapter.addFragment(new DashaFragment(), "Dasha");
         adapter.addFragment(new AntardashaFragment(), "Antardasha");
         viewPager.setAdapter(adapter);

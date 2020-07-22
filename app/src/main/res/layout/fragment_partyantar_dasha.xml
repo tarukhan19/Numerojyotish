@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Fragment.AntardashaFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
         android:background="@color/white"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -16,9 +18,11 @@
             android:padding="8dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:weightSum="4"
+            android:weightSum="5"
+            android:background="@color/yellow_inactive"
+
             >
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/fromdateTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -26,45 +30,70 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:text="From Date"
+                android:textSize="14sp"
                 />
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/todateTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_weight="1"
+                android:text="To Date"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 />
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+
+            <com.project.numerojyotish.customFont.TextViewBoldFont
+                android:id="@+id/partanyantardashaTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:text="Partyantar \nDasha"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="14sp"
+                />
+            <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/dashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_weight="1"
+                android:text="Dasha"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 />
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/antardashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_weight="1"
+                android:text="Antar Dasha"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"
             />
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:background="@color/white"
 
+            android:visibility="visible" />
+    </LinearLayout>
 </layout>

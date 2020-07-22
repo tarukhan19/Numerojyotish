@@ -1,5 +1,6 @@
 package com.project.numerojyotish.Activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -9,7 +10,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.project.numerojyotish.Api.ApiClass;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.Utils.ConnectivityReceiver;
 import com.project.numerojyotish.Utils.MyApplication;
@@ -35,7 +39,8 @@ ActivityBasicInfoBinding binding;
     String name,dob,gender="Male";
     boolean isConnected;
     private SessionManager session;
-
+    static BasicInfoActivity basicInfoActivity;
+    ApiClass apiClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +67,13 @@ ActivityBasicInfoBinding binding;
                 }
                 else
                 {
+                    session.setBasicDetails(dob,name,gender);
+
                     checkConnection();
                     if (isConnected)
                     {
-                        session.setBasicDetails(dob,name,gender);
-                        Intent in7 = new Intent(BasicInfoActivity.this, HomePageActivity.class);
-                        in7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                        startActivity(in7);
-                        overridePendingTransition(R.anim.trans_left_in,
-                                R.anim.trans_left_out);
+                        apiClass.getHomeData(BasicInfoActivity.this,"");
+
                     }
                     else
                     {
@@ -144,7 +147,12 @@ ActivityBasicInfoBinding binding;
         binding.maleRB.setTypeface(customFont);
         binding.femaleRB.setTypeface(customFont);
         session = new SessionManager(getApplicationContext());
+        apiClass = new ApiClass();
+        basicInfoActivity = this;
 
+    }
+    public static BasicInfoActivity getInstance() {
+        return basicInfoActivity;
     }
 
 
@@ -220,6 +228,34 @@ ActivityBasicInfoBinding binding;
         this.isConnected=isConnected;
         showSnack(isConnected);
     }
+    public void runThread(final String response) {
 
+        new Thread() {
+            public void run() {
+                try {
+                    runOnUiThread(new Runnable() {
+
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public void run() {
+                            Log.e("response",response);
+                            session.setResponse(response);
+                            Intent in7 = new Intent(BasicInfoActivity.this, HomePageActivity.class);
+                            in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                            startActivity(in7);
+                            overridePendingTransition(R.anim.trans_left_in,
+                                    R.anim.trans_left_out);
+
+                        }
+                    });
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
+    }
 
 }

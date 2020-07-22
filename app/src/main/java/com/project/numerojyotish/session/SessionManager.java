@@ -23,6 +23,7 @@ public class SessionManager {
     public static final String KEY_DOB = "dob";
     public static final String KEY_NAME = "name";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_RESPONSE = "response";
 
 
 
@@ -31,6 +32,20 @@ public class SessionManager {
         int PRIVATE_MODE = 0;
         pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+    }
+
+    public HashMap<String, String> getResponse() {
+        HashMap<String, String> user = new HashMap<>();
+        user.put(KEY_RESPONSE, pref.getString(KEY_RESPONSE, ""));
+
+        return user;
+    }
+
+
+    public void setResponse(String response) {
+        editor.putString(KEY_RESPONSE, response);
+
+        editor.commit();
     }
 
 

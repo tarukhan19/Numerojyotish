@@ -168,8 +168,8 @@ ActivityLoginBinding binding;
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, EndPoints.LOGIN,
+        String url= EndPoints.LOGIN+"?userId="+mobileNo+"&password="+password;
+        StringRequest postRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response)
@@ -212,19 +212,20 @@ ActivityLoginBinding binding;
                         progressDialog.dismiss();
                     }
                 }
-        ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("userId", mobileNo);
-                params.put("password", password);
-                /// params.put("DeviceId", "regId");
-
-
-                Log.e("params", params.toString());
-                return params;
-            }
-        };
+        );
+//        {
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("userId", mobileNo);
+//                params.put("password", password);
+//                /// params.put("DeviceId", "regId");
+//
+//
+//                Log.e("params", params.toString());
+//                return params;
+//            }
+//        };
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);

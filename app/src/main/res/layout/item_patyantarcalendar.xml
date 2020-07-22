@@ -16,7 +16,7 @@
             android:padding="8dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:weightSum="4"
+            android:weightSum="5"
             >
             <com.project.numerojyotish.customFont.TextViewAirenregular
                 android:id="@+id/fromdateTV"
@@ -30,6 +30,16 @@
                 />
             <com.project.numerojyotish.customFont.TextViewAirenregular
                 android:id="@+id/todateTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="12sp"
+                />
+            <com.project.numerojyotish.customFont.TextViewAirenregular
+                android:id="@+id/patyantardashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"

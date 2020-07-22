@@ -1,28 +1,23 @@
 package com.project.numerojyotish.Fragment;
 
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.project.numerojyotish.Adapter.AntarDashaCalendarAdapter;
+import com.project.numerojyotish.Adapter.PartyantarDashaAdpater;
 import com.project.numerojyotish.Api.ApiClass;
-import com.project.numerojyotish.Interface.ApiInterface;
-import com.project.numerojyotish.Model.AntarDashaCalendarDTO;
+import com.project.numerojyotish.Model.PartyantarDashaDTO;
 import com.project.numerojyotish.R;
-import com.project.numerojyotish.databinding.FragmentAntardashaBinding;
+import com.project.numerojyotish.databinding.FragmentPartyantarDashaBinding;
 import com.project.numerojyotish.session.SessionManager;
 
 import org.json.JSONArray;
@@ -35,15 +30,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AntardashaFragment extends Fragment {
-    static AntardashaFragment antardashaFragment;
-    ApiClass apiClass;
-    FragmentAntardashaBinding binding;
+public class PartyantarDashaFragment extends Fragment {
+FragmentPartyantarDashaBinding binding;
+    private List<PartyantarDashaDTO> partyantarDashaDTOList;
+    PartyantarDashaAdpater adapter;
     SessionManager sessionManager;
-    AntarDashaCalendarAdapter adapter;
-    private List<AntarDashaCalendarDTO> antarDashaCalendarDTOList;
 
-    public AntardashaFragment() {
+    public PartyantarDashaFragment() {
         // Required empty public constructor
     }
 
@@ -51,11 +44,8 @@ public class AntardashaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_antardasha, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_partyantar_dasha, container, false);
         View view = binding.getRoot();
-
         initialize();
         return  view;
     }
@@ -63,10 +53,9 @@ public class AntardashaFragment extends Fragment {
     private void initialize() {
 
         sessionManager=  new SessionManager(getActivity().getApplicationContext());
-        antardashaFragment = this;
-        apiClass = new ApiClass();
-        antarDashaCalendarDTOList=new ArrayList<>();
-        adapter = new AntarDashaCalendarAdapter(getActivity(), antarDashaCalendarDTOList);
+
+        partyantarDashaDTOList=new ArrayList<>();
+        adapter = new PartyantarDashaAdpater(getActivity(), partyantarDashaDTOList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         binding.recyclerView.setLayoutManager(mLayoutManager);
@@ -80,17 +69,18 @@ public class AntardashaFragment extends Fragment {
         String resounse=sessionManager.getResponse().get(SessionManager.KEY_RESPONSE);
         try {
             JSONObject jsonObject=new JSONObject(resounse);
-            JSONArray antardashaArray=jsonObject.getJSONArray("AnterDashaCalander");
-            for (int i=0;i<antardashaArray.length();i++)
+            JSONArray dashaArray=jsonObject.getJSONArray("PartyantarDashaCalander");
+            for (int i=0;i<dashaArray.length();i++)
             {
-                JSONObject dashaObj=antardashaArray.getJSONObject(i);
-                AntarDashaCalendarDTO antarDashaCalendarDTO=new AntarDashaCalendarDTO();
-                antarDashaCalendarDTO.setDasha(dashaObj.getString("dasha"));
-                antarDashaCalendarDTO.setYearFrom(dashaObj.getString("yearFrom"));
-                antarDashaCalendarDTO.setYearTo(dashaObj.getString("yearTo"));
-                antarDashaCalendarDTO.setAntardasha(dashaObj.getString("anterDasha"));
+                JSONObject dashaObj=dashaArray.getJSONObject(i);
+                PartyantarDashaDTO partyantarDashaDTO=new PartyantarDashaDTO();
+                partyantarDashaDTO.setDasha(dashaObj.getString("dasha"));
+                partyantarDashaDTO.setYearFrom(dashaObj.getString("yearFrom"));
+                partyantarDashaDTO.setYearTo(dashaObj.getString("yearTo"));
+                partyantarDashaDTO.setAntardasha(dashaObj.getString("anterDasha"));
+                partyantarDashaDTO.setPartyantardasha(dashaObj.getString("partyantarDasha"));
 
-                antarDashaCalendarDTOList.add(antarDashaCalendarDTO);
+                partyantarDashaDTOList.add(partyantarDashaDTO);
 
             }
             adapter.notifyDataSetChanged();
@@ -98,5 +88,6 @@ public class AntardashaFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
 
 }

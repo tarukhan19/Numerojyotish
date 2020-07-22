@@ -24,6 +24,10 @@ import com.project.numerojyotish.R;
 import com.project.numerojyotish.databinding.FragmentDashaBinding;
 import com.project.numerojyotish.session.SessionManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +64,6 @@ public class DashaFragment extends Fragment {
         sessionManager=  new SessionManager(getActivity().getApplicationContext());
         dashaFragment = this;
         apiClass = new ApiClass();
-        apiClass.getHomeData(getActivity());
         dashaCalendarDtoList=new ArrayList<>();
         adapter = new DashaCalendarAdapter(getActivity(), dashaCalendarDtoList);
 
@@ -68,32 +71,31 @@ public class DashaFragment extends Fragment {
         binding.recyclerView.setLayoutManager(mLayoutManager);
         binding.recyclerView.setAdapter(adapter);
 
+        loaddata();
+
     }
 
-    public static DashaFragment getInstance() {
-        return dashaFragment;
-    }
-    public void runThread(final String response) {
+    private void loaddata() {
+        String resounse=sessionManager.getResponse().get(SessionManager.KEY_RESPONSE);
+        try {
+            JSONObject jsonObject=new JSONObject(resounse);
+            JSONArray dashaArray=jsonObject.getJSONArray("DashaCalander");
+            for (int i=0;i<dashaArray.length();i++)
+            {
+                JSONObject dashaObj=dashaArray.getJSONObject(i);
+                DashaCalendarDto dashaCalendarDto=new DashaCalendarDto();
+                dashaCalendarDto.setDasha(dashaObj.getString("dasha"));
+                dashaCalendarDto.setYearFrom(dashaObj.getString("yearFrom"));
+                dashaCalendarDto.setYearTo(dashaObj.getString("yearTo"));
 
-        new Thread() {
-            public void run() {
-                try {
-                    getActivity().runOnUiThread(new Runnable() {
-
-                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                        @Override
-                        public void run()
-                        {
-                        Log.e("DashaFragmentresponse",response);
-                        }
-                    });
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                dashaCalendarDtoList.add(dashaCalendarDto);
 
             }
-        }.start();
+            adapter.notifyDataSetChanged();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
+
 
 }
