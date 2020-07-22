@@ -23,6 +23,9 @@ public class SessionManager {
     public static final String KEY_DOB = "dob";
     public static final String KEY_NAME = "name";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_FROMDATE= "fromdate";
+    public static final String KEY_TODATE = "todate";
+
     public static final String KEY_RESPONSE = "response";
 
 
@@ -54,15 +57,20 @@ public class SessionManager {
         user.put(KEY_DOB, pref.getString(KEY_DOB, ""));
         user.put(KEY_NAME, pref.getString(KEY_NAME, ""));
         user.put(KEY_GENDER, pref.getString(KEY_GENDER, ""));
+        user.put(KEY_FROMDATE, pref.getString(KEY_FROMDATE, ""));
+        user.put(KEY_TODATE, pref.getString(KEY_TODATE, ""));
 
         return user;
     }
 
 
-    public void setBasicDetails(String dob,String name,String gender) {
+    public void setBasicDetails(String dob,String name,String gender,String fromdate,String todate) {
         editor.putString(KEY_DOB, dob);
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_GENDER, gender);
+        editor.putString(KEY_FROMDATE, fromdate);
+        editor.putString(KEY_TODATE, todate);
+
         editor.commit();
     }
 

@@ -49,7 +49,8 @@ public class ApiClass implements ApiInterface
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME);
+        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME)
+                +"&fromDate="+session.getBasicDetails().get(SessionManager.KEY_FROMDATE)+"&toDate="+session.getBasicDetails().get(SessionManager.KEY_TODATE);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {

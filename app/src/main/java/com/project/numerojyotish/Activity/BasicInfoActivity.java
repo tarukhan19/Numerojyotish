@@ -36,7 +36,7 @@ import java.util.Locale;
 public class BasicInfoActivity extends AppCompatActivity implements  ConnectivityReceiver.ConnectivityReceiverListener {
 ActivityBasicInfoBinding binding;
     private int mYear, mMonth, mDay;
-    String name,dob,gender="Male";
+    String name,dob,gender="Male",fromdate,todate;
     boolean isConnected;
     private SessionManager session;
     static BasicInfoActivity basicInfoActivity;
@@ -52,6 +52,8 @@ ActivityBasicInfoBinding binding;
             public void onClick(View v) {
                 name=binding.nameET.getText().toString();
                 dob=binding.dobTV.getText().toString();
+                fromdate=binding.fromdateTV.getText().toString();
+                todate=binding.todateTV.getText().toString();
                 if (binding.maleRB.isChecked()) {
                     gender = "Male";
                 } else {
@@ -67,7 +69,7 @@ ActivityBasicInfoBinding binding;
                 }
                 else
                 {
-                    session.setBasicDetails(dob,name,gender);
+                    session.setBasicDetails(dob,name,gender,fromdate,todate);
 
                     checkConnection();
                     if (isConnected)
@@ -88,9 +90,24 @@ ActivityBasicInfoBinding binding;
         binding.dobTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showDateTimePicker("dob");
+            }
+        });
+
+        binding.fromdateTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateTimePicker("fromdate");
+            }
+        });
+
+        binding.todateTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 showDateTimePicker("todate");
             }
         });
+
 
     }
     private void openDialog(String message, final String imagetype)
@@ -173,8 +190,22 @@ ActivityBasicInfoBinding binding;
 
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
 
+                if (from.equalsIgnoreCase("dob"))
+                {
                     binding.dobTV.setText(sdf.format(myCalendar.getTime()));
 
+                }
+                else if(from.equalsIgnoreCase("todate"))
+                {
+                    binding.todateTV.setText(sdf.format(myCalendar.getTime()));
+
+                }
+
+                else if(from.equalsIgnoreCase("fromdate"))
+                {
+                    binding.fromdateTV.setText(sdf.format(myCalendar.getTime()));
+
+                }
 
 
                 mDay = selectedday;

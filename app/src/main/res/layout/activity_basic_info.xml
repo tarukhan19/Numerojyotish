@@ -4,13 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Activity.BasicInfoActivity">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
 
+    >
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/background"
         >
         <ImageView
             android:layout_width="250dp"
@@ -57,6 +61,39 @@
                 android:textSize="15sp"
                 android:maxLines="1"
                 />
+
+            <com.project.numerojyotish.customFont.TextViewAirenregular
+                android:id="@+id/fromdateTV"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittextbackground"
+                android:hint="From Date"
+                android:paddingLeft="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:textSize="15sp"
+                android:maxLines="1"
+                />
+
+            <com.project.numerojyotish.customFont.TextViewAirenregular
+                android:id="@+id/todateTV"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittextbackground"
+                android:hint="To Date"
+                android:paddingLeft="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:layout_marginTop="8dp"
+                android:textSize="15sp"
+                android:maxLines="1"
+                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,6 +153,7 @@
                 android:text="Submit"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
+                android:layout_marginBottom="20dp"
                 />
         </LinearLayout>
 
@@ -123,5 +161,5 @@
 
 
     </LinearLayout>
-
+</ScrollView>
 </layout>
