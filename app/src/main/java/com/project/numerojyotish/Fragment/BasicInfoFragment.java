@@ -44,10 +44,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class BasicInfoFragment extends Fragment {
-    private BasicChartAdapter adapter;
-    private ArrayList<BasicChartDTO> basicChartDTOArrayList;
-    private ChartValuesAdapter chartValuesAdapter;
-    private ArrayList<ChartValuesDTO> chartValuesDTOArrayList;
 
     FragmentBasicInfoBinding binding;
     SessionManager sessionManager;
@@ -72,32 +68,7 @@ public class BasicInfoFragment extends Fragment {
     private void initialize() {
 
         sessionManager=  new SessionManager(getActivity().getApplicationContext());
-        basicChartDTOArrayList = new ArrayList<>();
-        adapter = new BasicChartAdapter(getActivity(), basicChartDTOArrayList);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
-        binding.recyclerView.setLayoutManager(mLayoutManager);
-        binding.recyclerView.scheduleLayoutAnimation();
-        binding.recyclerView.setNestedScrollingEnabled(false);
 
-        DividerItemDecoration verticalDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
-                DividerItemDecoration.HORIZONTAL);
-        Drawable verticalDivider = ContextCompat.getDrawable(getActivity(), R.drawable.vertical_divider);
-        verticalDecoration.setDrawable(verticalDivider);
-        binding.recyclerView.addItemDecoration(verticalDecoration);
-
-        DividerItemDecoration horizontalDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
-                DividerItemDecoration.VERTICAL);
-        Drawable horizontalDivider = ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider);
-        horizontalDecoration.setDrawable(horizontalDivider);
-        binding.recyclerView.addItemDecoration(horizontalDecoration);
-        binding.recyclerView.setAdapter(adapter);
-
-
-        chartValuesDTOArrayList = new ArrayList<>();
-        chartValuesAdapter = new ChartValuesAdapter(getActivity(), chartValuesDTOArrayList);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity());
-        binding.chartValuesrecyclerview.setLayoutManager(mLayoutManager1);
-        binding.chartValuesrecyclerview.setAdapter(chartValuesAdapter);
 
         loaddata();
 
@@ -108,60 +79,22 @@ public class BasicInfoFragment extends Fragment {
         String resounse=sessionManager.getResponse().get(SessionManager.KEY_RESPONSE);
         try {
             JSONObject jsonObject=new JSONObject(resounse);
-            JSONObject basicInfoObj=jsonObject.getJSONObject("BasicChart");
+        //    JSONObject basicInfoObj=jsonObject.getJSONObject("BasicChart");
 
             binding.nameTV.setText(jsonObject.getString("name"));
             binding.dobTV.setText(jsonObject.getString("DOB"));
+            binding.genderTV.setText(jsonObject.getString("Gender"));
 
-            binding.basicNoTV.setText(basicInfoObj.getString("basicNo"));
-            binding.destinyTV.setText(basicInfoObj.getString("dastinyNo"));
-            binding.supportiveNotv.setText(basicInfoObj.getString("supportiveNo"));
-            binding.luckynobynameTV.setText(jsonObject.getString("LuckyColDirNobyDestiny"));
-            binding.luckynobydestinyTV.setText(jsonObject.getString("LuckyNo"));
-
-            JSONArray basicChartArray=basicInfoObj.getJSONArray("basicChart");
-            JSONArray chartValuesArray=jsonObject.getJSONArray("ChartValues");
-
-            for (int i=0;i<basicChartArray.length();i++)
-            {
-                String basicchartString=basicChartArray.getString(i);
-                BasicChartDTO basicChartDTO=new BasicChartDTO();
-                basicChartDTO.setBasicchartvalue(basicchartString);
-                basicChartDTOArrayList.add(basicChartDTO);
-
-            }
-            adapter.notifyDataSetChanged();
+            binding.basicNoTV.setText(jsonObject.getString("BasicNo"));
+            binding.destinyTV.setText(jsonObject.getString("DestinyNo"));
+            binding.supportiveNotv.setText(jsonObject.getString("SupportiveNo"));
+            binding.luckynoTV.setText(jsonObject.getString("LuckyNo"));
+            binding.luckycolorTV.setText(jsonObject.getString("LuckyColor"));
+            binding.luckydirectionTV.setText(jsonObject.getString("LuckyDirection"));
+            binding.zodiacsignTV.setText(jsonObject.getString("ZodianSign"));
 
 
-            for (int j=0;j<chartValuesArray.length();j++)
-            {
-                JSONObject chartValuesjsonobj=chartValuesArray.getJSONObject(j);
-                String fromDate=chartValuesjsonobj.getString("fromDate");
-                String toDate=chartValuesjsonobj.getString("toDate");
 
-                Log.e("fromdate",fromDate);
-                Log.e("toDate",toDate);
-
-                JSONArray anterDashaChartValues=chartValuesjsonobj.getJSONArray("anterDashaChartValues");
-
-                ChartValuesDTO chartValuesDTO=new ChartValuesDTO();
-                chartValuesDTO.setFromdate(fromDate);
-                chartValuesDTO.setTodate(toDate);
-                ArrayList<AntardashaChartValuesDTO> antardashaChartValuesDTOArrayList=new ArrayList<>();
-                for (int k=0;k<anterDashaChartValues.length();k++)
-                {
-                    String values=anterDashaChartValues.getString(k);
-                    Log.e("values",values);
-
-                    AntardashaChartValuesDTO antardashaChartValuesDTO=new AntardashaChartValuesDTO();
-                    antardashaChartValuesDTO.setAntardashaValues(values);
-                    antardashaChartValuesDTOArrayList.add(antardashaChartValuesDTO);
-                }
-                chartValuesDTO.setAntardashaChartValuesArrayList(antardashaChartValuesDTOArrayList);
-                chartValuesDTOArrayList.add(chartValuesDTO);
-
-            }
-            chartValuesAdapter.notifyDataSetChanged();
 
         } catch (JSONException e) {
             e.printStackTrace();

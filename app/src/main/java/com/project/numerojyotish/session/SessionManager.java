@@ -57,17 +57,30 @@ public class SessionManager {
         user.put(KEY_DOB, pref.getString(KEY_DOB, ""));
         user.put(KEY_NAME, pref.getString(KEY_NAME, ""));
         user.put(KEY_GENDER, pref.getString(KEY_GENDER, ""));
-        user.put(KEY_FROMDATE, pref.getString(KEY_FROMDATE, ""));
-        user.put(KEY_TODATE, pref.getString(KEY_TODATE, ""));
+
 
         return user;
     }
 
 
-    public void setBasicDetails(String dob,String name,String gender,String fromdate,String todate) {
+    public void setBasicDetails(String dob,String name,String gender) {
         editor.putString(KEY_DOB, dob);
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_GENDER, gender);
+
+        editor.commit();
+    }
+
+    public HashMap<String, String> getFromToDate() {
+        HashMap<String, String> user = new HashMap<>();
+        user.put(KEY_FROMDATE, pref.getString(KEY_FROMDATE, ""));
+        user.put(KEY_TODATE, pref.getString(KEY_TODATE, ""));
+        return user;
+    }
+
+
+    public void setFromToDate(String fromdate,String todate) {
+
         editor.putString(KEY_FROMDATE, fromdate);
         editor.putString(KEY_TODATE, todate);
 

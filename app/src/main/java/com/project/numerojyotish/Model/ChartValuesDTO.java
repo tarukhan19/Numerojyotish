@@ -1,10 +1,21 @@
 package com.project.numerojyotish.Model;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class ChartValuesDTO {
     String fromdate,todate;
     ArrayList<AntardashaChartValuesDTO> antardashaChartValuesArrayList;
+    JSONArray pratyanterDashChartModels;
+
+    public JSONArray getPratyanterDashChartModels() {
+        return pratyanterDashChartModels;
+    }
+
+    public void setPratyanterDashChartModels(JSONArray pratyanterDashChartModels) {
+        this.pratyanterDashChartModels = pratyanterDashChartModels;
+    }
 
     public String getFromdate() {
         return fromdate;

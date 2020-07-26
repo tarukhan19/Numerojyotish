@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Fragment.NameDetailsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.project.numerojyotish.customFont.EditTextAirenRegular
+            android:id="@+id/nameET"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/edittextbackground"
+            android:hint="Name"
+            android:paddingLeft="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginRight="10dp"
+            android:textSize="15sp"
+            android:maxLines="1"
+            />
+
+
+
+        <com.project.numerojyotish.customFont.ButtonAirenRegular
+            android:id="@+id/submitBTN"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/button"
+            android:layout_marginTop="20dp"
+            android:text="Submit"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16sp"
+            />
+        <LinearLayout
+            android:id="@+id/detailsLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rectbackground"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="50dp"
+            >
+            <com.project.numerojyotish.customFont.TextViewBoldFont
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Details: "
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:gravity="center"
+                android:background="@color/green"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:weightSum="1"
+                >
+
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Name: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/nameTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
+                >
+
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Lucky No: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/luckynoTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
+                >
+
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Name Char Value: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/nameCharValueTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</layout>

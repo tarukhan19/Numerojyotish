@@ -49,15 +49,18 @@ public class ApiClass implements ApiInterface
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME)
-                +"&fromDate="+session.getBasicDetails().get(SessionManager.KEY_FROMDATE)+"&toDate="+session.getBasicDetails().get(SessionManager.KEY_TODATE);
+        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME);
+
+
+     //   String url= EndPoints.LOAD_DATA+"?dob="+"07/24/2010"+"&gender="+"Female"+"&name="+"tk";
 
         StringRequest postRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(String response)
+                    {
+                        Log.e("response", response + "");
                         progressDialog.dismiss();
-                        Log.e("response", response);
 
                         // {"Id":1,"Status":"Success"}
                         // {"id":1,"status":"success","WalletAmount":542.64}

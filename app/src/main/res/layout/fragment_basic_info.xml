@@ -13,32 +13,6 @@
         android:background="@color/white"
         android:orientation="vertical"
         >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rectcolorbackground"
-        android:padding="8dp"
-        android:layout_margin="10dp"
-        >
-        <com.project.numerojyotish.customFont.TextViewBoldFont
-            android:id="@+id/luckynobynameTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_gravity="start"
-            android:gravity="start"
-            android:textSize="16sp" />
-
-        <com.project.numerojyotish.customFont.TextViewBoldFont
-            android:id="@+id/luckynobydestinyTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_gravity="start"
-            android:gravity="start"
-            android:textSize="16sp" />
-    </LinearLayout>
 
 
         <LinearLayout
@@ -116,6 +90,39 @@
                     android:textSize="16sp" />
                 <com.project.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/dobTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
+                >
+
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Gender: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/genderTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -230,76 +237,145 @@
 
 
             </LinearLayout>
-        </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectbackground"
-                android:padding="8dp"
-                android:layout_margin="10dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
                 >
 
                 <com.project.numerojyotish.customFont.TextViewBoldFont
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Basic Chart: "
-                    android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    android:background="@color/green"
+                    android:textColor="@color/black"
+                    android:text="Lucky No: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
                     android:textSize="16sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/luckynoTV"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:clipToPadding="false"
-                    android:scrollbars="vertical"
-                    android:padding="8dp"
-                    android:background="@color/white"
-                    android:visibility="visible" />
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
 
             </LinearLayout>
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectbackground"
-            android:padding="8dp"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            >
-
-            <com.project.numerojyotish.customFont.TextViewBoldFont
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Chart Values: "
+                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:padding="5dp"
                 android:gravity="center"
-                android:background="@color/green"
-                android:textSize="16sp" />
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
+                >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chartValuesrecyclerview"
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Lucky Color: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/luckycolorTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:scrollbars="vertical"
-                android:padding="8dp"
-                android:background="@color/white"
-                android:visibility="visible" />
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
+                >
 
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Lucky Direction: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/luckydirectionTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:weightSum="1"
+                >
+
+                <com.project.numerojyotish.customFont.TextViewBoldFont
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Zodiac Sign: "
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:textSize="16sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/zodiacsignTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rs. 14000"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
+
 
 
 

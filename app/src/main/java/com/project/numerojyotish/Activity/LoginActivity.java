@@ -175,7 +175,6 @@ ActivityLoginBinding binding;
                     public void onResponse(String response)
                     {
                         progressDialog.dismiss();
-                        Log.e("response", response);
 
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -222,7 +221,6 @@ ActivityLoginBinding binding;
 //                /// params.put("DeviceId", "regId");
 //
 //
-//                Log.e("params", params.toString());
 //                return params;
 //            }
 //        };

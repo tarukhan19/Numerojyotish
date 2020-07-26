@@ -25,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.project.numerojyotish.Api.ApiClass;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.Utils.ConnectivityReceiver;
+import com.project.numerojyotish.Utils.HideKeyboard;
 import com.project.numerojyotish.Utils.MyApplication;
 import com.project.numerojyotish.databinding.ActivityBasicInfoBinding;
 import com.project.numerojyotish.session.SessionManager;
@@ -36,7 +37,8 @@ import java.util.Locale;
 public class BasicInfoActivity extends AppCompatActivity implements  ConnectivityReceiver.ConnectivityReceiverListener {
 ActivityBasicInfoBinding binding;
     private int mYear, mMonth, mDay;
-    String name,dob,gender="Male",fromdate,todate;
+    String name,dob,gender="Male";
+    int yy,mm,dd;
     boolean isConnected;
     private SessionManager session;
     static BasicInfoActivity basicInfoActivity;
@@ -52,8 +54,11 @@ ActivityBasicInfoBinding binding;
             public void onClick(View v) {
                 name=binding.nameET.getText().toString();
                 dob=binding.dobTV.getText().toString();
-                fromdate=binding.fromdateTV.getText().toString();
-                todate=binding.todateTV.getText().toString();
+                HideKeyboard.hideKeyboard(BasicInfoActivity.this);
+
+
+        //      apiClass.getHomeData(BasicInfoActivity.this,"");
+
                 if (binding.maleRB.isChecked()) {
                     gender = "Male";
                 } else {
@@ -69,7 +74,7 @@ ActivityBasicInfoBinding binding;
                 }
                 else
                 {
-                    session.setBasicDetails(dob,name,gender,fromdate,todate);
+                    session.setBasicDetails(dob,name,gender);
 
                     checkConnection();
                     if (isConnected)
@@ -90,23 +95,16 @@ ActivityBasicInfoBinding binding;
         binding.dobTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDateTimePicker("dob");
+                try {
+                    showDateTimePicker("dob");
+
+                }
+                catch (Exception e)
+                {}
             }
         });
 
-        binding.fromdateTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateTimePicker("fromdate");
-            }
-        });
 
-        binding.todateTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateTimePicker("todate");
-            }
-        });
 
 
     }
@@ -179,10 +177,11 @@ ActivityBasicInfoBinding binding;
         mYear = mcurrentDate.get(Calendar.YEAR);
         mMonth = mcurrentDate.get(Calendar.MONTH);
         mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+        final Calendar myCalendar = Calendar.getInstance();
 
         DatePickerDialog mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                Calendar myCalendar = Calendar.getInstance();
+
                 myCalendar.set(Calendar.YEAR, selectedyear);
                 myCalendar.set(Calendar.MONTH, selectedmonth);
                 myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
@@ -195,17 +194,6 @@ ActivityBasicInfoBinding binding;
                     binding.dobTV.setText(sdf.format(myCalendar.getTime()));
 
                 }
-                else if(from.equalsIgnoreCase("todate"))
-                {
-                    binding.todateTV.setText(sdf.format(myCalendar.getTime()));
-
-                }
-
-                else if(from.equalsIgnoreCase("fromdate"))
-                {
-                    binding.fromdateTV.setText(sdf.format(myCalendar.getTime()));
-
-                }
 
 
                 mDay = selectedday;
@@ -213,6 +201,10 @@ ActivityBasicInfoBinding binding;
                 mYear = selectedyear;
             }
         }, mYear, mMonth, mDay);
+
+
+
+            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
 
         mDatePicker.show();
     }
@@ -269,7 +261,6 @@ ActivityBasicInfoBinding binding;
                         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                         @Override
                         public void run() {
-                            Log.e("response",response);
                             session.setResponse(response);
                             Intent in7 = new Intent(BasicInfoActivity.this, HomePageActivity.class);
                             in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

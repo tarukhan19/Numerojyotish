@@ -21,7 +21,6 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-
                 android:weightSum="1"
                 >
 
@@ -56,6 +55,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:weightSum="1"
+
                 >
 
                 <com.project.numerojyotish.customFont.TextViewBoldFont
@@ -83,19 +83,10 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.project.numerojyotish.customFont.TextViewBoldFont
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="Anter Dasha Chart Values:"
-            android:background="@color/darkorange"
-            android:layout_gravity="start"
-            android:gravity="start"
-            android:padding="5dp"
-            android:layout_margin="5dp"
-            android:textSize="16sp" />
+
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chartValuesrecyclerview"
+            android:id="@+id/pratyantardashachartvalueRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -106,37 +97,12 @@
             android:padding="8dp"
             android:background="@color/white"
             android:visibility="visible" />
-
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/innerrectbackground"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            >
+            android:layout_height="2dp"
+            android:background="@color/red"
+            android:layout_marginTop="5dp"
 
-            <com.project.numerojyotish.customFont.TextViewBoldFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Pratyantar Dasha Chart Values:"
-                android:background="@color/yellow_inactive"
-                android:layout_gravity="start"
-                android:gravity="start"
-                android:padding="5dp"
-                android:textSize="16sp" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pratyantardashachartvalueRV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-
-                android:clipToPadding="false"
-                android:scrollbars="vertical"
-                android:background="@color/white"
-                android:visibility="visible" />
-        </LinearLayout>
-
+            />
     </LinearLayout>
 </layout>

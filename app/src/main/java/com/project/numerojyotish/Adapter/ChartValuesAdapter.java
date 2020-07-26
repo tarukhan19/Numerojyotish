@@ -3,6 +3,7 @@ package com.project.numerojyotish.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,10 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.numerojyotish.Model.ChartValuesDTO;
+import com.project.numerojyotish.Model.PratyantadashaChartModelsDTO;
+import com.project.numerojyotish.Model.PratyantarDashaChartValuesDTO;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.databinding.ItemChartvaluesBinding;
 import com.project.numerojyotish.session.SessionManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChartValuesAdapter extends RecyclerView.Adapter<ChartValuesAdapter.ViewHolderPollAdapter> {
@@ -28,14 +36,14 @@ public class ChartValuesAdapter extends RecyclerView.Adapter<ChartValuesAdapter.
     ItemChartvaluesBinding binding;
     SessionManager sessionManager;
     AntardashaChartValuesAdapter antardashaChartValuesAdapter;
-    public ChartValuesAdapter(Context mcontex, List<ChartValuesDTO> chartValuesDTOList)
-    {
+    PratyantadashaChartModelsAdapter pratyantadashaChartModelsAdapter;
+
+    public ChartValuesAdapter(Context mcontex, List<ChartValuesDTO> chartValuesDTOList) {
         this.mcontex = mcontex;
         this.chartValuesDTOList = chartValuesDTOList;
-        activity= (Activity) mcontex;
+        activity = (Activity) mcontex;
         sessionManager = new SessionManager(mcontex.getApplicationContext());
     }
-
 
 
     @NonNull
@@ -51,9 +59,6 @@ public class ChartValuesAdapter extends RecyclerView.Adapter<ChartValuesAdapter.
     public void onBindViewHolder(@NonNull final ViewHolderPollAdapter holder, final int position) {
         holder.itemRowBinding.fromDateTV.setText(chartValuesDTOList.get(position).getFromdate());
         holder.itemRowBinding.todateTV.setText(chartValuesDTOList.get(position).getTodate());
-
-
-
         antardashaChartValuesAdapter = new AntardashaChartValuesAdapter(mcontex, chartValuesDTOList.get(position).getAntardashaChartValuesArrayList());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mcontex, 3);
         holder.itemRowBinding.chartValuesrecyclerview.setLayoutManager(mLayoutManager);
@@ -72,6 +77,46 @@ public class ChartValuesAdapter extends RecyclerView.Adapter<ChartValuesAdapter.
         horizontalDecoration.setDrawable(horizontalDivider);
         holder.itemRowBinding.chartValuesrecyclerview.addItemDecoration(horizontalDecoration);
         holder.itemRowBinding.chartValuesrecyclerview.setAdapter(antardashaChartValuesAdapter);
+
+
+
+        JSONArray pratyanterDashChartModels = chartValuesDTOList.get(position).getPratyanterDashChartModels();
+        ArrayList<PratyantadashaChartModelsDTO> pratyantadashaChartModelsDTOArrayList = new ArrayList<>();
+        pratyantadashaChartModelsAdapter= new PratyantadashaChartModelsAdapter(mcontex, pratyantadashaChartModelsDTOArrayList);
+
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(mcontex);
+        binding.pratyantardashachartvalueRV.setLayoutManager(mLayoutManager1);
+        binding.pratyantardashachartvalueRV.setAdapter(pratyantadashaChartModelsAdapter);
+
+        for (int i = 0; i < pratyanterDashChartModels.length(); i++) {
+
+            try {
+                JSONObject chartValuesjsonobj = pratyanterDashChartModels.getJSONObject(i);
+                String fromDate = chartValuesjsonobj.getString("fromDate");
+                String toDate = chartValuesjsonobj.getString("toDate");
+
+                JSONArray pratyanterDashChartValues = chartValuesjsonobj.getJSONArray("pratyanterDashaChartValues");
+                PratyantadashaChartModelsDTO pratyantadashaChartModelsDTO = new PratyantadashaChartModelsDTO();
+                pratyantadashaChartModelsDTO.setFromDate(fromDate);
+                pratyantadashaChartModelsDTO.setToDate(toDate);
+                ArrayList<PratyantarDashaChartValuesDTO> pratyantarDashaChartValuesDTOArrayList = new ArrayList<>();
+
+                for (int k = 0; k < pratyanterDashChartValues.length(); k++) {
+                    String values = pratyanterDashChartValues.getString(k);
+
+                    PratyantarDashaChartValuesDTO pratyantarDashaChartValuesDTO = new PratyantarDashaChartValuesDTO();
+                    pratyantarDashaChartValuesDTO.setPratyantardashaValues(values);
+                    pratyantarDashaChartValuesDTOArrayList.add(pratyantarDashaChartValuesDTO);
+                }
+                pratyantadashaChartModelsDTO.setPratyantadashaChartValuesDTOArrayList(pratyantarDashaChartValuesDTOArrayList);
+                pratyantadashaChartModelsDTOArrayList.add(pratyantadashaChartModelsDTO);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        pratyantadashaChartModelsAdapter.notifyDataSetChanged();
 
     }
 
