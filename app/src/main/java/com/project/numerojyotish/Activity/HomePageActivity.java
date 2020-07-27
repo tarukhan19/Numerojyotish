@@ -206,12 +206,29 @@ public class HomePageActivity extends AppCompatActivity {
     private void setupTabIcons()
     {
 
+
+
+        TextView tabone = (TextView)
+                LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
+        tabone.setText("Basic Info");
+        tabone.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
+        tabone.setTextSize(15);
+        binding.tabs.getTabAt(0).setCustomView(tabone);
+
+        TextView tabTwo = (TextView)
+                LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
+        tabTwo.setText("Dasha");
+        tabTwo.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
+        tabTwo.setTextSize(15);
+        binding.tabs.getTabAt(1).setCustomView(tabTwo);
+
         TextView tabThree = (TextView)
                 LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
-        tabThree.setText("Basic Info");
+        tabThree.setText("Antardasha");
         tabThree.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
         tabThree.setTextSize(15);
-        binding.tabs.getTabAt(0).setCustomView(tabThree);
+        binding.tabs.getTabAt(2).setCustomView(tabThree);
+
 
         TextView tabFour = (TextView)
                 LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
@@ -221,20 +238,8 @@ public class HomePageActivity extends AppCompatActivity {
         binding.tabs.getTabAt(3).setCustomView(tabFour);
 
 
-        TextView tabOne = (TextView)
-                LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
-        tabOne.setText("Dasha");
-        tabOne.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
-        tabOne.setTextSize(15);
-        binding.tabs.getTabAt(1).setCustomView(tabOne);
 
 
-        TextView tabTwo = (TextView)
-                LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
-        tabTwo.setText("Antardasha");
-        tabTwo.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
-        tabTwo.setTextSize(15);
-        binding.tabs.getTabAt(2).setCustomView(tabTwo);
 
 
     }
@@ -242,9 +247,9 @@ public class HomePageActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new BasicInfoFragment(), "Basic Info");
-        adapter.addFragment(new PartyantarDashaFragment(), "Partyantar Dasha");
         adapter.addFragment(new DashaFragment(), "Dasha");
         adapter.addFragment(new AntardashaFragment(), "Antardasha");
+        adapter.addFragment(new PartyantarDashaFragment(), "Partyantar Dasha");
         viewPager.setAdapter(adapter);
     }
 
