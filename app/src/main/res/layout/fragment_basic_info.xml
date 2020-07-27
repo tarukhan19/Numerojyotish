@@ -106,7 +106,8 @@
                     <com.project.numerojyotish.customFont.TextViewBoldFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Lucky No."
+                        android:text="Destiny No"
+
                         android:textColor="@color/black"
                         android:layout_gravity="center"
                         android:gravity="center"
@@ -114,7 +115,7 @@
                         />
 
                     <com.project.numerojyotish.customFont.TextViewAirenregular
-                        android:id="@+id/luckynoTV"
+                        android:id="@+id/destinyNoTV"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -272,13 +273,13 @@
                     <com.project.numerojyotish.customFont.TextViewBoldFont
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Destiny No"
+                        android:text="Lucky No."
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         />
 
                     <com.project.numerojyotish.customFont.TextViewAirenregular
-                        android:id="@+id/destinyNoTV"
+                        android:id="@+id/luckynoTV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
