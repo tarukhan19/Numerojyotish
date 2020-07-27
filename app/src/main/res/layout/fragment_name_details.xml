@@ -12,7 +12,7 @@
             android:id="@+id/nameET"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@drawable/edittextbackground"
+            android:background="@drawable/whiteedittextback"
             android:hint="Name"
             android:paddingLeft="15dp"
             android:textColor="@color/black"
@@ -27,21 +27,21 @@
             android:maxLines="1"
             />
 
-
-
         <com.project.numerojyotish.customFont.ButtonAirenRegular
             android:id="@+id/submitBTN"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="45dp"
-            android:background="@drawable/button"
-            android:layout_marginTop="20dp"
+            android:background="@drawable/gradient"
+            android:layout_marginTop="50dp"
             android:text="Submit"
-            android:textColor="@color/colorPrimary"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
             android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             />
+
+
+
         <LinearLayout
             android:id="@+id/detailsLL"
             android:layout_width="match_parent"

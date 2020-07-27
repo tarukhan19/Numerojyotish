@@ -7,7 +7,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorPrimary"
 
     >
     <LinearLayout
@@ -115,13 +115,14 @@
 
             <com.project.numerojyotish.customFont.ButtonAirenRegular
                 android:id="@+id/submitBTN"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="45dp"
-                android:background="@drawable/button"
+                android:background="@drawable/gradient"
                 android:layout_marginTop="20dp"
                 android:text="Submit"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="16sp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 />
         </LinearLayout>

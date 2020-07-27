@@ -14,7 +14,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/item_toolbar" />
+            layout="@layout/home_toolbar" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
 
@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
             android:background="@color/white"
+            android:layout_marginBottom="@dimen/dimen_70dp"
 
             >
             <LinearLayout
@@ -73,7 +74,7 @@
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            app:backgroundColor="@color/billcolorPrimary"
+            app:backgroundColor="@color/colorPrimary"
             app:textColor="@color/white"
             app:textSize="12sp"
             app:iconSize="20dp"

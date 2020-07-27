@@ -10,14 +10,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +56,7 @@ public class HomePageActivity extends AppCompatActivity {
     public static int navItemIndex = 0;
     public static String CURRENT_TAG = TAG_HOME;
     private String[] activityTitles;
-    ImageView plusimage;
+    ImageView plusimage,logout;
     ActivityHomePageBinding binding;
     Fragment fragment;
 
@@ -70,14 +73,26 @@ public class HomePageActivity extends AppCompatActivity {
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         mTitle = toolbar.findViewById(R.id.toolbar_title);
         plusimage = toolbar.findViewById(R.id.plusimage);
-
+        logout= toolbar.findViewById(R.id.logout);
         plusimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                                Intent in7 = new Intent(HomePageActivity.this, BasicInfoActivity.class);
+                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                startActivity(in7);
+                overridePendingTransition(R.anim.trans_left_in,
+                        R.anim.trans_left_out);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLogOutDialog();
+
             }
         });
 
@@ -134,6 +149,58 @@ public class HomePageActivity extends AppCompatActivity {
 
 
     }
+    private void showLogOutDialog()
+    {
+
+        final Dialog dialog = new Dialog(this, R.style.CustomDialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.item_logout);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
+        TextView descriptionTV = dialog.findViewById(R.id.descriptionTV);
+        TextView titleTV = dialog.findViewById(R.id.titleTV);
+        ImageView imageView = dialog.findViewById(R.id.imageView);
+        Button yesBTN = dialog.findViewById(R.id.yesBTN);
+        Button noBtn = dialog.findViewById(R.id.noBtn);
+
+
+        yesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                dialog.dismiss();
+                sessionManager.logoutUser();
+                Intent in7 = new Intent(HomePageActivity.this, LoginActivity.class);
+                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(in7);
+                overridePendingTransition(R.anim.trans_left_in,
+                        R.anim.trans_left_out);
+
+            }
+        });
+
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                dialog.dismiss();
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent in7 = new Intent(HomePageActivity.this, BasicInfoActivity.class);
+        in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in7);
+        overridePendingTransition(R.anim.trans_left_in,
+                R.anim.trans_left_out);
+    }
 
     @SuppressLint("ResourceType")
     private void setupTabIcons()
@@ -151,7 +218,7 @@ public class HomePageActivity extends AppCompatActivity {
         tabFour.setText("Partyantar Dasha");
         tabFour.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
         tabFour.setTextSize(15);
-        binding.tabs.getTabAt(1).setCustomView(tabFour);
+        binding.tabs.getTabAt(3).setCustomView(tabFour);
 
 
         TextView tabOne = (TextView)
@@ -159,7 +226,7 @@ public class HomePageActivity extends AppCompatActivity {
         tabOne.setText("Dasha");
         tabOne.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
         tabOne.setTextSize(15);
-        binding.tabs.getTabAt(2).setCustomView(tabOne);
+        binding.tabs.getTabAt(1).setCustomView(tabOne);
 
 
         TextView tabTwo = (TextView)
@@ -167,7 +234,7 @@ public class HomePageActivity extends AppCompatActivity {
         tabTwo.setText("Antardasha");
         tabTwo.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
         tabTwo.setTextSize(15);
-        binding.tabs.getTabAt(3).setCustomView(tabTwo);
+        binding.tabs.getTabAt(2).setCustomView(tabTwo);
 
 
     }

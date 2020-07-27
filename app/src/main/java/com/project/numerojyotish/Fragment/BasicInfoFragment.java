@@ -82,16 +82,22 @@ public class BasicInfoFragment extends Fragment {
         //    JSONObject basicInfoObj=jsonObject.getJSONObject("BasicChart");
 
             binding.nameTV.setText(jsonObject.getString("name"));
-            binding.dobTV.setText(jsonObject.getString("DOB"));
+            binding.birthDateTV.setText(jsonObject.getString("DOB"));
             binding.genderTV.setText(jsonObject.getString("Gender"));
 
-            binding.basicNoTV.setText(jsonObject.getString("BasicNo"));
-            binding.destinyTV.setText(jsonObject.getString("DestinyNo"));
-            binding.supportiveNotv.setText(jsonObject.getString("SupportiveNo"));
+            binding.basicNoTv.setText(jsonObject.getString("BasicNo"));
+            binding.destinyNoTV.setText(jsonObject.getString("DestinyNo"));
+            binding.supportivenoTV.setText(jsonObject.getString("SupportiveNo"));
             binding.luckynoTV.setText(jsonObject.getString("LuckyNo"));
-            binding.luckycolorTV.setText(jsonObject.getString("LuckyColor"));
-            binding.luckydirectionTV.setText(jsonObject.getString("LuckyDirection"));
-            binding.zodiacsignTV.setText(jsonObject.getString("ZodianSign"));
+            binding.luckyColorTV.setText(jsonObject.getString("LuckyColor"));
+            binding.luckyDirecTV.setText(jsonObject.getString("LuckyDirection"));
+            binding.zodiacSignTV.setText(jsonObject.getString("ZodianSign"));
+
+            String remark=jsonObject.getString("Remark");
+            remark = remark.replace("\\n", "");
+            remark = remark.replace("\\t", "").trim();
+
+            binding.remarkTV.setText(remark);
 
 
 

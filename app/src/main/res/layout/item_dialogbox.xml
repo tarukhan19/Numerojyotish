@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/button"
+            android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:text="OK"
             android:textSize="20sp"

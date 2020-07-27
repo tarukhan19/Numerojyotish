@@ -9,12 +9,12 @@
     <item
         android:id="@+id/second_fragment"
         android:title="Chart"
-        android:icon="@drawable/home"/>
+        android:icon="@drawable/chart"/>
 
     <item
         android:id="@+id/third_fragment"
         android:title="Name"
-        android:icon="@drawable/home"/>
+        android:icon="@drawable/name"/>
 
 
 </menu>

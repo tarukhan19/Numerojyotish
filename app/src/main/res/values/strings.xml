@@ -11,4 +11,7 @@
 
 
     </string-array>
+    <string name="logout">Are you sure?</string>
+    <string name="logoutdesc">You want to logout?</string>
+
 </resources>

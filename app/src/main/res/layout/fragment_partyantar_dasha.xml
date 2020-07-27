@@ -19,64 +19,64 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:weightSum="5"
-            android:background="@color/yellow_inactive"
+            android:background="@drawable/gradient"
 
             >
             <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/fromdateTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="From Date"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
             <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/todateTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:text="To Date"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
 
             <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/partanyantardashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:text="Partyantar \nDasha"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
             <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/dashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:text="Dasha"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
             <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:id="@+id/antardashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:text="Antar Dasha"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
         </LinearLayout>
 

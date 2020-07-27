@@ -96,6 +96,8 @@ ActivityBasicInfoBinding binding;
             @Override
             public void onClick(View view) {
                 try {
+                    HideKeyboard.hideKeyboard(BasicInfoActivity.this);
+
                     showDateTimePicker("dob");
 
                 }

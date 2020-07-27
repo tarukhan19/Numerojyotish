@@ -30,7 +30,7 @@ public class ButtonAirenRegular extends AppCompatButton
     }
 
     private void applyCustomFont(Context context) {
-        Typeface customFont = Typeface.createFromAsset(context.getAssets(), "fonts/EverybodyBold.otf");
+        Typeface customFont = Typeface.createFromAsset(context.getAssets(), "fonts/Laila-Bold.ttf");
         setTypeface(customFont);
     }
 }
