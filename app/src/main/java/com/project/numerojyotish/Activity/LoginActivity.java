@@ -182,7 +182,7 @@ ActivityLoginBinding binding;
 
                                 session.setUserId();
                                 Intent in7 = new Intent(LoginActivity.this, BasicInfoActivity.class);
-                                in7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(in7);
                                 overridePendingTransition(R.anim.trans_left_in,
                                         R.anim.trans_left_out);

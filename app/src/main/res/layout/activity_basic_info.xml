@@ -4,17 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Activity.BasicInfoActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
 
-    >
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+    android:background="@drawable/imagebackground"
         android:orientation="vertical"
         >
         <ImageView
@@ -131,5 +126,4 @@
 
 
     </LinearLayout>
-</ScrollView>
 </layout>
