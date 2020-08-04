@@ -1,5 +1,6 @@
 package com.project.numerojyotish.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -16,7 +17,10 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,13 +31,16 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.project.numerojyotish.Fragment.AntardashaFragment;
 import com.project.numerojyotish.Fragment.BasicInfoFragment;
+import com.project.numerojyotish.Fragment.ChangePasswordFragment;
 import com.project.numerojyotish.Fragment.ChartFragment;
 import com.project.numerojyotish.Fragment.DashaFragment;
 import com.project.numerojyotish.Fragment.NameDetailsFragment;
 import com.project.numerojyotish.Fragment.PartyantarDashaFragment;
+import com.project.numerojyotish.Fragment.RegistrationFragment;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.databinding.ActivityHomePageBinding;
 import com.project.numerojyotish.session.SessionManager;
@@ -42,6 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
+import me.ibrahimsn.lib.SmoothBottomBar;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -53,6 +61,9 @@ public class HomePageActivity extends AppCompatActivity {
     private static final String TAG_HOME = "home";
     private static final String TAG_CHART = "chart";
     private static final String TAG_DETAIL = "detailfromname";
+    private static final String TAG_REGISTRATION = "registration";
+    private static final String TAG_CHANGEPASSWORD = "changepassword";
+
     public static int navItemIndex = 0;
     public static String CURRENT_TAG = TAG_HOME;
     private String[] activityTitles;
@@ -60,8 +71,10 @@ public class HomePageActivity extends AppCompatActivity {
     ActivityHomePageBinding binding;
     Fragment fragment;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_page);
 
@@ -79,7 +92,7 @@ public class HomePageActivity extends AppCompatActivity {
         plusimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                                Intent in7 = new Intent(HomePageActivity.this, BasicInfoActivity.class);
+                Intent in7 = new Intent(HomePageActivity.this, BasicInfoActivity.class);
                 in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 startActivity(in7);
@@ -87,6 +100,8 @@ public class HomePageActivity extends AppCompatActivity {
                         R.anim.trans_left_out);
             }
         });
+
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,48 +125,74 @@ public class HomePageActivity extends AppCompatActivity {
         CURRENT_TAG = TAG_HOME;
         navItemIndex = 0;
         loadHomeFragment();
-
-
-        binding.bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public boolean onItemSelect(int pos) {
-                switch (pos) {
-                    case 0:
-                        CURRENT_TAG = TAG_HOME;
-                        binding.appbarLL.setVisibility(View.VISIBLE);
-                        binding.viewpager.setVisibility(View.VISIBLE);
-                        navItemIndex = 0;
-                        loadHomeFragment();
-
-                        break;
-
-                    case 1:
-                        CURRENT_TAG = TAG_CHART;
-                        binding.appbarLL.setVisibility(View.GONE);
-                        binding.viewpager.setVisibility(View.GONE);
-                        navItemIndex = 1;
-                        loadHomeFragment();
-                        break;
-
-                    case 2:
-                        CURRENT_TAG = TAG_DETAIL;
-                        binding.appbarLL.setVisibility(View.GONE);
-                        binding.viewpager.setVisibility(View.GONE);
-                        navItemIndex = 2;
-                        loadHomeFragment();
-                        break;
-                }
-                return false;
-            }
-
-
-        });
+        hideItem();
+        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
     }
+    public void hideItem()
+    {
+        if (!sessionManager.getLoginDetail().get(SessionManager.KEY_ROLE).equalsIgnoreCase("Admin"))
+        {
+            binding.navigation.getMenu().removeItem(R.id.fourth_fragment);
+        }
+        else
+        {
+            binding.navigation.getMenu().removeItem(R.id.fifth_fragment);
+
+        }
+
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch (item.getItemId()) {
+                case R.id.first_fragment:
+                    CURRENT_TAG = TAG_HOME;
+                    binding.appbarLL.setVisibility(View.VISIBLE);
+                    binding.viewpager.setVisibility(View.VISIBLE);
+                    navItemIndex = 0;
+                    loadHomeFragment();
+                    return true;
+                case R.id.second_fragment:
+                    CURRENT_TAG = TAG_CHART;
+                    binding.appbarLL.setVisibility(View.GONE);
+                    binding.viewpager.setVisibility(View.GONE);
+                    navItemIndex = 1;
+                    loadHomeFragment();
+                    return true;
+                case R.id.third_fragment:
+                    CURRENT_TAG = TAG_DETAIL;
+                    binding.appbarLL.setVisibility(View.GONE);
+                    binding.viewpager.setVisibility(View.GONE);
+                    navItemIndex = 2;
+                    loadHomeFragment();
+                    return true;
+                case R.id.fourth_fragment:
+                    CURRENT_TAG = TAG_REGISTRATION;
+                    binding.appbarLL.setVisibility(View.GONE);
+                    binding.viewpager.setVisibility(View.GONE);
+                    navItemIndex = 3;
+                    loadHomeFragment();
+                    return true;
+
+                case R.id.fifth_fragment:
+                    CURRENT_TAG = TAG_CHANGEPASSWORD;
+                    binding.appbarLL.setVisibility(View.GONE);
+                    binding.viewpager.setVisibility(View.GONE);
+                    navItemIndex = 4;
+                    loadHomeFragment();
+                    return true;
+            }
+            return false;
+        }
+    };
     private void showLogOutDialog()
     {
-
         final Dialog dialog = new Dialog(this, R.style.CustomDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.item_logout);
@@ -206,8 +247,6 @@ public class HomePageActivity extends AppCompatActivity {
     private void setupTabIcons()
     {
 
-
-
         TextView tabone = (TextView)
                 LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
         tabone.setText("Basic Info");
@@ -238,13 +277,10 @@ public class HomePageActivity extends AppCompatActivity {
         binding.tabs.getTabAt(3).setCustomView(tabFour);
 
 
-
-
-
-
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager)
+    {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new BasicInfoFragment(), "Basic Info");
         adapter.addFragment(new DashaFragment(), "Dasha");
@@ -282,11 +318,10 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
-    private void loadHomeFragment() {
+    private void loadHomeFragment()
+    {
         // selecting appropriate nav menu item
         setToolbarTitle();
-
-
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
@@ -303,8 +338,11 @@ public class HomePageActivity extends AppCompatActivity {
             mHandler.post(mPendingRunnable);
         }
 
+
         invalidateOptionsMenu();
     }
+
+
 
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
@@ -335,6 +373,21 @@ public class HomePageActivity extends AppCompatActivity {
                 CURRENT_TAG = TAG_DETAIL;
 
                 return nameDetailsFragment;
+
+            case 3:
+
+                RegistrationFragment registrationFragment = new RegistrationFragment();
+                navItemIndex = 3;
+                CURRENT_TAG = TAG_REGISTRATION;
+
+                return registrationFragment;
+
+            case 4:
+
+                ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+                navItemIndex = 4;
+                CURRENT_TAG = TAG_CHANGEPASSWORD;
+                return changePasswordFragment;
 
 
             default:

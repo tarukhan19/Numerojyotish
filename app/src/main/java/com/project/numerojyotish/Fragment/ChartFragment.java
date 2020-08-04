@@ -1,7 +1,9 @@
 package com.project.numerojyotish.Fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -173,7 +175,7 @@ FragmentChartBinding binding;
         mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
         final Calendar myCalendar = Calendar.getInstance();
 
-        DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT,new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
 
                 myCalendar.set(Calendar.YEAR, selectedyear);

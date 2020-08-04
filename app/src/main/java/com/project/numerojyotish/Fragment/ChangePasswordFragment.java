@@ -1,8 +1,4 @@
-package com.project.numerojyotish.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.databinding.DataBindingUtil;
+package com.project.numerojyotish.Fragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -10,13 +6,21 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -24,78 +28,71 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
+import com.project.numerojyotish.Activity.BasicInfoActivity;
+import com.project.numerojyotish.Activity.LoginActivity;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.Utils.ConnectivityReceiver;
 import com.project.numerojyotish.Utils.EndPoints;
 import com.project.numerojyotish.Utils.HideKeyboard;
 import com.project.numerojyotish.Utils.MyApplication;
-import com.project.numerojyotish.databinding.ActivityLoginBinding;
+import com.project.numerojyotish.databinding.FragmentChangePasswordBinding;
 import com.project.numerojyotish.session.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.NetworkInterface;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
-public class LoginActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
-    ActivityLoginBinding binding;
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ChangePasswordFragment extends Fragment  implements ConnectivityReceiver.ConnectivityReceiverListener {
+    FragmentChangePasswordBinding binding;
     private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
     private SessionManager session;
-    String mobileNo, password;
     boolean isConnected;
-    String imeino;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        initialize();
+    private int mYear, mMonth, mDay;
+    String oldpassword, password, confpassword;
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_change_password, container, false);
+        View view = binding.getRoot();
+        initialize();
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                HideKeyboard.hideKeyboard(LoginActivity.this);
+                HideKeyboard.hideKeyboard(getActivity());
 
                 submit();
             }
         });
-
-        binding.forgetpasswordTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in7 = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(in7);
-                overridePendingTransition(R.anim.trans_left_in,
-                        R.anim.trans_left_out);
-
-            }
-        });
-
+    return view;
     }
 
     private void submit() {
-        mobileNo = binding.mobileNoET.getText().toString();
-        password = binding.passwordET.getText().toString();
-        if (mobileNo.isEmpty()) {
-            openDialog("Enter valid Mobile No", "warning");
-        } else if (password.isEmpty()) {
-            openDialog("Enter valid Password.", "warning");
+        oldpassword = binding.oldpasswordET.getText().toString();
+
+        password = binding.newpasswordET.getText().toString();
+        confpassword = binding.confNewpasswordET.getText().toString();
+        if (oldpassword.isEmpty()) {
+            openDialog("Enter valid old Password.", "warning");
+        }
+        else if (password.isEmpty()) {
+            openDialog("Enter valid new Password.", "warning");
+        } else if (!confpassword.equals(password)) {
+            openDialog("Password doesn't match", "warning");
         } else {
             checkConnection();
             if (isConnected) {
-                imeino=getDeviceID();
-                login(imeino);
+                changePassword();
 
             } else {
                 showSnack(isConnected);
@@ -107,20 +104,27 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
     private void initialize() {
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
-            Window window = getWindow();
+            Window window = getActivity().getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
         }
-        session = new SessionManager(getApplicationContext());
-        progressDialog = new ProgressDialog(this);
-        requestQueue = Volley.newRequestQueue(this);
+        session = new SessionManager(getActivity().getApplicationContext());
+        progressDialog = new ProgressDialog(getActivity());
+        requestQueue = Volley.newRequestQueue(getActivity());
     }
-
-
     private void checkConnection() {
         isConnected = ConnectivityReceiver.isConnected();
 
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     private void showSnack(boolean isConnected) {
@@ -135,18 +139,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         }
 
         Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.linearlayout), message, Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(R.id.linearlayout), message, Snackbar.LENGTH_LONG);
 
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
         textView.setTextColor(color);
         snackbar.show();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     @Override
@@ -157,16 +155,18 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
     }
 
-    private void login(final String imeino)
+    private void changePassword()
     {
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        String url = EndPoints.LOGIN + "?userId=" + mobileNo + "&password=" + password+"&IMEINO="+imeino;
+
+        String url = EndPoints.CHANGE_PASSWORD + "?userId=" + session.getLoginDetail().get(SessionManager.KEY_MOBILE_NO) +
+                "&oldPassword=" + oldpassword+ "&newPassword=" + password+ "&imeiNo=" + session.getLoginDetail().get(SessionManager.KEY_IMEI_NO);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -176,24 +176,18 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         try {
                             JSONObject obj = new JSONObject(response);
                             Log.e("response",response);
-
                             int id = obj.getInt("Code");
                             String msg = obj.getString("Status");
 
-                            if (id == 200 && msg.equalsIgnoreCase("Success")) {
-                                String role = obj.optString("role");
+                            if (id == 200 ) {
 
-                                session.setLoginDetail(role,mobileNo,imeino);
-                                Intent in7 = new Intent(LoginActivity.this, BasicInfoActivity.class);
-                                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(in7);
-                                overridePendingTransition(R.anim.trans_left_in,
-                                        R.anim.trans_left_out);
-
+                                String alertmsg = obj.getString("Message");
+                                session.logoutUser();
+                                openDialog(alertmsg, "SUCCESS");
 
                             } else {
                                 String alertmsg = obj.getString("Message");
-                                openDialog(alertmsg, "failure");
+                                openDialog(alertmsg, "FAIL");
                             }
 
 
@@ -210,61 +204,16 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     }
                 }
         );
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("userId", mobileNo);
-//                params.put("password", password);
-//                /// params.put("DeviceId", "regId");
-//
-//
-//                return params;
-//            }
-//        };
+
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
         requestQueue.add(postRequest);
-    }
 
-    private String getDeviceID()
-    {
-        String _deviceId = "000000000000000";
-        try
-        {
-            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface nif : all) {
-                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
-
-                byte[] macBytes = nif.getHardwareAddress();
-                if (macBytes == null) {
-                    return "";
-                }
-
-                StringBuilder res1 = new StringBuilder();
-                for (byte b : macBytes) {
-                    res1.append(String.format("%02X:",b));
-                }
-
-                if (res1.length() > 0) {
-                    res1.deleteCharAt(res1.length() - 1);
-                }
-                _deviceId = res1.toString();
-            }
-        }
-        catch (Exception e)
-        {
-            Log.d("ERROR", e.toString());
-            //Logger.getLogger().WriteLog(e.getMessage());
-            _deviceId = "000000000000000";
-
-        }
-        return _deviceId;
     }
 
     private void openDialog(String message, final String imagetype) {
-        final Dialog dialog = new Dialog(this, R.style.CustomDialog);
+        final Dialog dialog = new Dialog(getActivity(), R.style.CustomDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.item_dialogbox);
         dialog.setCanceledOnTouchOutside(false);
@@ -280,28 +229,31 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         if (imagetype.equalsIgnoreCase("warning")) {
             imageView.setImageResource(R.drawable.warning);
             titleTV.setText("Warning!");
-        } else if (imagetype.equalsIgnoreCase("success")) {
+        } else if (imagetype.equalsIgnoreCase("SUCCESS")) {
             imageView.setImageResource(R.drawable.success);
             titleTV.setText("Success!");
-        } else if (imagetype.equalsIgnoreCase("failure")) {
+        } else if (imagetype.equalsIgnoreCase("FAIL")) {
             imageView.setImageResource(R.drawable.sorry);
             titleTV.setText("Failure!");
         }
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (imagetype.equalsIgnoreCase("warning") || imagetype.equalsIgnoreCase("failure")) {
+                if (imagetype.equalsIgnoreCase("warning") || imagetype.equalsIgnoreCase("FAIL")) {
                     dialog.dismiss();
                 } else {
                     dialog.dismiss();
-                    Intent in7 = new Intent(LoginActivity.this, BasicInfoActivity.class);
-                    in7.putExtra("from", "login");
 
+                    binding.oldpasswordET.setText("");
+                    binding.newpasswordET.setText("");
+                    binding.confNewpasswordET.setText("");
+
+                    Intent in7 = new Intent(getActivity(), LoginActivity.class);
                     in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                     startActivity(in7);
-                    overridePendingTransition(R.anim.trans_left_in,
+                    getActivity().overridePendingTransition(R.anim.trans_left_in,
                             R.anim.trans_left_out);
+
                 }
 
 

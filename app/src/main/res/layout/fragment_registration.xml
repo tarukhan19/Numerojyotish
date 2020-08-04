@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+
+                    >
+                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                        android:id="@+id/firstNameET"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="First Name"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+
+                        />
+                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                        android:id="@+id/lastNameET"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Last Name"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:inputType="text"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+
+                        />
+
+
+
+                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                        android:id="@+id/mobileNoET"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Mobile No"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+
+                        />
+
+                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                        android:id="@+id/emailET"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Email ID"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+
+                        />
+
+                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                        android:id="@+id/dobTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Date Of Birth"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:gravity="center_vertical"
+                        android:inputType="text"
+                        android:layout_marginTop="8dp"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        />
+
+
+                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                        android:id="@+id/membExpDateTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Member Expiration Date"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:gravity="center_vertical"
+                        android:inputType="text"
+                        android:layout_marginTop="8dp"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <com.project.numerojyotish.customFont.TextViewAirenregular
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Gender*"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+
+                            <RadioButton
+                                android:id="@+id/maleRB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:gravity="center"
+                                android:text="Male"
+                                android:buttonTint="@color/colorPrimary"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:id="@+id/femaleRB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="Female"
+                                android:buttonTint="@color/colorPrimary"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp"
+
+                                />
+
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                        android:id="@+id/passwordET"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Password"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:inputType="textPassword"
+                        android:maxLength="15"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        />
+
+                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                        android:id="@+id/confpasswordET"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/edittextbackground"
+                        android:hint="Confirm Password"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:inputType="textPassword"
+                        android:maxLength="15"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        />
+
+
+                    <com.project.numerojyotish.customFont.ButtonAirenRegular
+                        android:id="@+id/loginBTN"
+                        android:layout_width="150dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/gradient"
+                        android:layout_marginTop="50dp"
+                        android:text="Submit"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="20dp"
+                        />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

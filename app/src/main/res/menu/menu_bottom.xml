@@ -15,6 +15,15 @@
         android:id="@+id/third_fragment"
         android:title="Name"
         android:icon="@drawable/name"/>
+    <item
+        android:id="@+id/fourth_fragment"
+        android:title="Registration"
+        android:icon="@drawable/registration"/>
+    <item
+        android:id="@+id/fifth_fragment"
+        android:title="Change Password"
+        android:icon="@drawable/changepassword"/>
+
 
 
 </menu>

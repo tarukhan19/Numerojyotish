@@ -27,6 +27,9 @@ public class SessionManager {
     public static final String KEY_TODATE = "todate";
 
     public static final String KEY_RESPONSE = "response";
+    public static final String KEY_ROLE = "role";
+    public static final String KEY_MOBILE_NO = "mobileno";
+    public static final String KEY_IMEI_NO = "imei";
 
 
 
@@ -88,14 +91,22 @@ public class SessionManager {
     }
 
 
-    public void setUserId() {
+    public void setLoginDetail(String role,String mobileNo,String imei) {
         editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_ROLE, role);
+        editor.putString(KEY_MOBILE_NO, mobileNo);
+        editor.putString(KEY_IMEI_NO, imei);
+
         editor.commit();
     }
 
     // Get stored session data
-    public HashMap<String, String> getUserId() {
+    public HashMap<String, String> getLoginDetail() {
         HashMap<String, String> user = new HashMap<>();
+        user.put(KEY_ROLE, pref.getString(KEY_ROLE, ""));
+        user.put(KEY_MOBILE_NO, pref.getString(KEY_MOBILE_NO, ""));
+        user.put(KEY_IMEI_NO, pref.getString(KEY_IMEI_NO, ""));
+
         return user;
     }
 

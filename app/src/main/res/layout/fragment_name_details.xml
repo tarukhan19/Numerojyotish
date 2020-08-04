@@ -27,19 +27,6 @@
             android:maxLines="1"
             />
 
-        <com.project.numerojyotish.customFont.ButtonAirenRegular
-            android:id="@+id/submitBTN"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:background="@drawable/gradient"
-            android:layout_marginTop="50dp"
-            android:text="Submit"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            />
-
 
 
         <LinearLayout
@@ -49,10 +36,10 @@
             android:orientation="vertical"
             android:background="@drawable/rectbackground"
             android:padding="8dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             >
             <com.project.numerojyotish.customFont.TextViewBoldFont
                 android:layout_width="match_parent"
@@ -145,6 +132,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:weightSum="1"
+                android:visibility="gone"
                 >
 
                 <com.project.numerojyotish.customFont.TextViewBoldFont
@@ -171,6 +159,20 @@
 
             </LinearLayout>
         </LinearLayout>
+        <com.project.numerojyotish.customFont.ButtonAirenRegular
+            android:id="@+id/submitBTN"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:background="@drawable/gradient"
+            android:layout_marginTop="50dp"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            />
+
+
 
     </LinearLayout>
 

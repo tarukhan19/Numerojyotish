@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -37,7 +38,7 @@ import java.util.Locale;
 public class BasicInfoActivity extends AppCompatActivity implements  ConnectivityReceiver.ConnectivityReceiverListener {
 ActivityBasicInfoBinding binding;
     private int mYear, mMonth, mDay;
-    String name,dob,gender="Male";
+    String name,dob="",gender="Male";
     int yy,mm,dd;
     boolean isConnected;
     private SessionManager session;
@@ -56,9 +57,6 @@ ActivityBasicInfoBinding binding;
                 dob=binding.dobTV.getText().toString();
                 HideKeyboard.hideKeyboard(BasicInfoActivity.this);
 
-
-        //      apiClass.getHomeData(BasicInfoActivity.this,"");
-
                 if (binding.maleRB.isChecked()) {
                     gender = "Male";
                 } else {
@@ -75,7 +73,6 @@ ActivityBasicInfoBinding binding;
                 else
                 {
                     session.setBasicDetails(dob,name,gender);
-
                     checkConnection();
                     if (isConnected)
                     {
@@ -152,14 +149,13 @@ ActivityBasicInfoBinding binding;
                 else
                 {
                     dialog.dismiss();
-
                 }
-
 
             }
         });
     }
-    private void initialize() {
+    private void initialize()
+    {
         Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Laila-Regular.ttf");
         binding.maleRB.setTypeface(customFont);
         binding.femaleRB.setTypeface(customFont);
@@ -181,7 +177,7 @@ ActivityBasicInfoBinding binding;
         mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
         final Calendar myCalendar = Calendar.getInstance();
 
-        DatePickerDialog mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog mDatePicker = new DatePickerDialog(this,  AlertDialog.THEME_HOLO_LIGHT,new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
 
                 myCalendar.set(Calendar.YEAR, selectedyear);
@@ -205,7 +201,8 @@ ActivityBasicInfoBinding binding;
         }, mYear, mMonth, mDay);
 
 
-
+     //   mDatePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
             mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
 
         mDatePicker.show();

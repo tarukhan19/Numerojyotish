@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -28,13 +29,17 @@ public class MainActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
         }
 
+
+
+        Log.e("sessionlogin",session.isLoggedIn()+"");
         new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
 
-                if (session.isLoggedIn()) {
+                if (session.isLoggedIn())
+                {
                     Intent intent=new Intent(MainActivity.this, BasicInfoActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -43,10 +48,14 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
                 else
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                overridePendingTransition(R.anim.trans_left_in,
-                        R.anim.trans_left_out);
-                finish();
+                {
+                    Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.trans_left_in,
+                            R.anim.trans_left_out);
+                    finish();
+                }
 
 
             }

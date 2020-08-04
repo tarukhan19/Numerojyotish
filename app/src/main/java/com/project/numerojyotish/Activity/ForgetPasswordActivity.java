@@ -32,7 +32,7 @@ import com.project.numerojyotish.Utils.ConnectivityReceiver;
 import com.project.numerojyotish.Utils.EndPoints;
 import com.project.numerojyotish.Utils.HideKeyboard;
 import com.project.numerojyotish.Utils.MyApplication;
-import com.project.numerojyotish.databinding.ActivityLoginBinding;
+import com.project.numerojyotish.databinding.ActivityForgetPasswordBinding;
 import com.project.numerojyotish.session.SessionManager;
 
 import org.json.JSONException;
@@ -40,58 +40,48 @@ import org.json.JSONObject;
 
 import java.net.NetworkInterface;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
 
-public class LoginActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
-    ActivityLoginBinding binding;
+public class ForgetPasswordActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
+ActivityForgetPasswordBinding binding;
     private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
     private SessionManager session;
-    String mobileNo, password;
+    String mobileNo;
     boolean isConnected;
     String imeino;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_forget_password);
         initialize();
 
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                HideKeyboard.hideKeyboard(LoginActivity.this);
+                HideKeyboard.hideKeyboard(ForgetPasswordActivity.this);
 
                 submit();
             }
         });
+    }
 
-        binding.forgetpasswordTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in7 = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(in7);
-                overridePendingTransition(R.anim.trans_left_in,
-                        R.anim.trans_left_out);
-
-            }
-        });
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent in7 = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
+        in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in7);
+        overridePendingTransition(R.anim.trans_left_in,
+                R.anim.trans_left_out);
     }
 
     private void submit() {
-        mobileNo = binding.mobileNoET.getText().toString();
-        password = binding.passwordET.getText().toString();
+        mobileNo = binding.mobilenoET.getText().toString();
         if (mobileNo.isEmpty()) {
             openDialog("Enter valid Mobile No", "warning");
-        } else if (password.isEmpty()) {
-            openDialog("Enter valid Password.", "warning");
-        } else {
+        }  else {
             checkConnection();
             if (isConnected) {
                 imeino=getDeviceID();
@@ -163,10 +153,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
     private void login(final String imeino)
     {
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading Please Wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        String url = EndPoints.LOGIN + "?userId=" + mobileNo + "&password=" + password+"&IMEINO="+imeino;
+
+        String url = EndPoints.CHANGE_PASSWORD + "?userId=" + mobileNo +
+               "&imeiNo=" + imeino;
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -176,24 +168,18 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         try {
                             JSONObject obj = new JSONObject(response);
                             Log.e("response",response);
-
                             int id = obj.getInt("Code");
                             String msg = obj.getString("Status");
+                            binding.mobilenoET.setText("");
 
-                            if (id == 200 && msg.equalsIgnoreCase("Success")) {
-                                String role = obj.optString("role");
+                            if (id == 200 ) {
 
-                                session.setLoginDetail(role,mobileNo,imeino);
-                                Intent in7 = new Intent(LoginActivity.this, BasicInfoActivity.class);
-                                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(in7);
-                                overridePendingTransition(R.anim.trans_left_in,
-                                        R.anim.trans_left_out);
-
+                                String alertmsg = obj.getString("Message");
+                                openDialog(alertmsg, "SUCCESS");
 
                             } else {
                                 String alertmsg = obj.getString("Message");
-                                openDialog(alertmsg, "failure");
+                                openDialog(alertmsg, "FAIL");
                             }
 
 
@@ -210,18 +196,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     }
                 }
         );
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("userId", mobileNo);
-//                params.put("password", password);
-//                /// params.put("DeviceId", "regId");
-//
-//
-//                return params;
-//            }
-//        };
+
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
@@ -283,26 +258,14 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         } else if (imagetype.equalsIgnoreCase("success")) {
             imageView.setImageResource(R.drawable.success);
             titleTV.setText("Success!");
-        } else if (imagetype.equalsIgnoreCase("failure")) {
+        } else if (imagetype.equalsIgnoreCase("Fail")) {
             imageView.setImageResource(R.drawable.sorry);
             titleTV.setText("Failure!");
         }
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (imagetype.equalsIgnoreCase("warning") || imagetype.equalsIgnoreCase("failure")) {
-                    dialog.dismiss();
-                } else {
-                    dialog.dismiss();
-                    Intent in7 = new Intent(LoginActivity.this, BasicInfoActivity.class);
-                    in7.putExtra("from", "login");
-
-                    in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                    startActivity(in7);
-                    overridePendingTransition(R.anim.trans_left_in,
-                            R.anim.trans_left_out);
-                }
+               dialog.dismiss();
 
 
             }

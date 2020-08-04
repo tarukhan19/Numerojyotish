@@ -100,7 +100,7 @@ FragmentNameDetailsBinding binding;
                             binding.detailsLL.setVisibility(View.VISIBLE);
                             binding.nameTV.setText(obj.getString("Name"));
                             binding.luckynoTV.setText(obj.getString("LuckeyNumber"));
-                            binding.nameCharValueTV.setText(obj.getString("NameCharValue"));
+//                            binding.nameCharValueTV.setText(obj.getString("NameCharValue"));
 
 
 

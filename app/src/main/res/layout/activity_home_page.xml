@@ -70,24 +70,20 @@
 
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        <me.ibrahimsn.lib.SmoothBottomBar
-            android:id="@+id/bottomBar"
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            app:backgroundColor="@color/colorPrimary"
-            app:textColor="@color/white"
-            app:textSize="12sp"
-            app:iconSize="20dp"
-            app:indicatorColor="#40FFFFFF"
-            app:indicatorRadius="10dp"
-            app:sideMargins="10dp"
-            android:layout_alignParentBottom="true"
-            app:itemPadding="10dp"
-            app:iconTint="#C8FFFFFF"
-            app:iconTintActive="#FFFFFF"
-            app:menu="@menu/menu_bottom"
-            />
+            android:layout_gravity="bottom"
 
+            app:itemIconTint="@android:color/white"
+            app:itemTextColor="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            app:itemBackground="@color/colorPrimary"
+            android:foreground="?attr/selectableItemBackground"
+            app:menu="@menu/menu_bottom" />
 
     </RelativeLayout>
 
