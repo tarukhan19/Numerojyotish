@@ -2,25 +2,18 @@ package com.project.numerojyotish.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.numerojyotish.Model.AntardashaChartValuesDTO;
-import com.project.numerojyotish.Model.ChartValuesDTO;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.databinding.ItemAntardashachartvaluesBinding;
 import com.project.numerojyotish.session.SessionManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AntardashaChartValuesAdapter extends RecyclerView.Adapter<AntardashaChartValuesAdapter.ViewHolderPollAdapter> {

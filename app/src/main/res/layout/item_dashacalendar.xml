@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="10sp"
             />
         <com.project.numerojyotish.customFont.TextViewAirenregular
             android:id="@+id/todateTV"
@@ -35,7 +35,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="10sp"
             />
         <com.project.numerojyotish.customFont.TextViewAirenregular
             android:id="@+id/dashaTV"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_weight="1"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:layout_gravity="center"
             android:gravity="center"
             />

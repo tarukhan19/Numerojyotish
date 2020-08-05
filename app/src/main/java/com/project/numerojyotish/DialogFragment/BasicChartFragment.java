@@ -2,7 +2,6 @@ package com.project.numerojyotish.DialogFragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -17,7 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -37,10 +37,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.project.numerojyotish.Adapter.BasicChartAdapter;
-import com.project.numerojyotish.Adapter.ChartValuesAdapter;
+import com.project.numerojyotish.Adapter.AntarDashaValuesAdapter;
+import com.project.numerojyotish.Adapter.PratyantadashaChartModelsAdapter;
 import com.project.numerojyotish.Model.AntardashaChartValuesDTO;
 import com.project.numerojyotish.Model.BasicChartDTO;
-import com.project.numerojyotish.Model.ChartValuesDTO;
+import com.project.numerojyotish.Model.AntardashaValuesDTO;
+import com.project.numerojyotish.Model.PratyantadashaChartModelsDTO;
+import com.project.numerojyotish.Model.PratyantarDashaChartValuesDTO;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.Utils.EndPoints;
 import com.project.numerojyotish.databinding.FragmentBasicChartBinding;
@@ -51,8 +54,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,9 +68,10 @@ public class BasicChartFragment extends DialogFragment {
     private SessionManager session;
     private BasicChartAdapter adapter;
     private ArrayList<BasicChartDTO> basicChartDTOArrayList;
-    private ChartValuesAdapter chartValuesAdapter;
-    private ArrayList<ChartValuesDTO> chartValuesDTOArrayList;
-
+    private AntarDashaValuesAdapter antarDashaValuesAdapter;
+    private ArrayList<AntardashaValuesDTO> antardashaValuesDTOArrayList;
+    ArrayList<PratyantadashaChartModelsDTO> pratyantadashaChartModelsDTOList;
+    PratyantadashaChartModelsAdapter pratyantadashaChartModelsAdapter;
     public BasicChartFragment() {
         // Required empty public constructor
     }
@@ -122,17 +125,36 @@ public class BasicChartFragment extends DialogFragment {
             binding.recyclerView.setAdapter(adapter);
 
 
-            chartValuesDTOArrayList = new ArrayList<>();
-            chartValuesAdapter = new ChartValuesAdapter(getActivity(), chartValuesDTOArrayList);
-            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity());
-            binding.chartValuesrecyclerview.setLayoutManager(mLayoutManager1);
-            binding.chartValuesrecyclerview.setAdapter(chartValuesAdapter);
+            antardashaValuesDTOArrayList = new ArrayList<>();
+            antarDashaValuesAdapter = new AntarDashaValuesAdapter(getActivity(), antardashaValuesDTOArrayList);
+
+            pratyantadashaChartModelsDTOList = new ArrayList<>();
+            pratyantadashaChartModelsAdapter = new PratyantadashaChartModelsAdapter(getActivity(), pratyantadashaChartModelsDTOList);
+
+
+            LinearLayoutManager layoutManager
+                    = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            binding.chartValuesrecyclerview.setLayoutManager(layoutManager);
+            binding.chartValuesrecyclerview.setHasFixedSize(true);
+            SnapHelper sh = new LinearSnapHelper();
+            sh.attachToRecyclerView(binding.chartValuesrecyclerview);
+            binding.chartValuesrecyclerview.setAdapter(antarDashaValuesAdapter);
+
+            LinearLayoutManager layoutManager1
+                    = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            binding.pratyantarValuesrecyclerview.setLayoutManager(layoutManager1);
+            binding.pratyantarValuesrecyclerview.setHasFixedSize(true);
+            SnapHelper sh1 = new LinearSnapHelper();
+            sh1.attachToRecyclerView(binding.pratyantarValuesrecyclerview);
+            binding.pratyantarValuesrecyclerview.setAdapter(pratyantadashaChartModelsAdapter);
+
             backIV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getDialog().dismiss();
                 }
             });
+
             submitData();
 
 
@@ -147,8 +169,7 @@ public class BasicChartFragment extends DialogFragment {
         progressDialog.setCancelable(false);
         progressDialog.show();
        String url= EndPoints.LOAD_CHART+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+
-                "&fromDate="+session.getFromToDate().get(SessionManager.KEY_FROMDATE)+
-                "&toDate="+session.getFromToDate().get(SessionManager.KEY_TODATE);
+               "&year="+session.getFromToDate().get(SessionManager.KEY_YEAR);
 
        Log.e("url",url);
 
@@ -166,7 +187,8 @@ public class BasicChartFragment extends DialogFragment {
 
 
                                 JSONArray basicChartArray=basicChartObj.getJSONArray("basicChart");
-                                JSONArray chartValuesArray=obj.getJSONArray("ChartValues");
+                                JSONArray anterdashaChartArray=obj.getJSONArray("AnterdashaChart");
+                             JSONArray pratyanterChartArray=obj.getJSONArray("PratyanterChart");
 
                                 for (int i=0;i<basicChartArray.length();i++)
                                 {
@@ -178,20 +200,44 @@ public class BasicChartFragment extends DialogFragment {
                                 }
                                 adapter.notifyDataSetChanged();
 
+                            for (int j=0;j<pratyanterChartArray.length();j++)
+                            {
+                                JSONObject chartValuesjsonobj=pratyanterChartArray.getJSONObject(j);
+                                String fromDate=chartValuesjsonobj.getString("fromDate");
+                                String toDate=chartValuesjsonobj.getString("toDate");
 
-                                for (int j=0;j<chartValuesArray.length();j++)
+
+                                JSONArray pratyantarDashaChartValues=chartValuesjsonobj.getJSONArray("pratyanterDashaChartValues");
+                                PratyantadashaChartModelsDTO pratyantadashaChartModelsDTO =new PratyantadashaChartModelsDTO();
+                                pratyantadashaChartModelsDTO.setFromDate(fromDate);
+                                pratyantadashaChartModelsDTO.setToDate(toDate);
+                                ArrayList<PratyantarDashaChartValuesDTO> pratyantarDashaChartValuesDTOArrayList=new ArrayList<>();
+
+                                for (int k=0;k<pratyantarDashaChartValues.length();k++)
                                 {
-                                    JSONObject chartValuesjsonobj=chartValuesArray.getJSONObject(j);
+                                    String values=pratyantarDashaChartValues.getString(k);
+                                    PratyantarDashaChartValuesDTO pratyantarDashaChartValuesDTO=new PratyantarDashaChartValuesDTO();
+                                    pratyantarDashaChartValuesDTO.setPratyantardashaValues(values);
+                                    pratyantarDashaChartValuesDTOArrayList.add(pratyantarDashaChartValuesDTO);
+                                }
+                                pratyantadashaChartModelsDTO.setPratyantadashaChartValuesDTOArrayList(pratyantarDashaChartValuesDTOArrayList);
+                                pratyantadashaChartModelsDTOList.add(pratyantadashaChartModelsDTO);
+
+                            }
+                            pratyantadashaChartModelsAdapter.notifyDataSetChanged();
+
+
+                                for (int j=0;j<anterdashaChartArray.length();j++)
+                                {
+                                    JSONObject chartValuesjsonobj=anterdashaChartArray.getJSONObject(j);
                                     String fromDate=chartValuesjsonobj.getString("fromDate");
                                     String toDate=chartValuesjsonobj.getString("toDate");
 
 
                                     JSONArray anterDashaChartValues=chartValuesjsonobj.getJSONArray("anterDashaChartValues");
-                                    JSONArray pratyanterDashChartModels=chartValuesjsonobj.getJSONArray("pratyanterDashChart");
-                                    ChartValuesDTO chartValuesDTO=new ChartValuesDTO();
-                                    chartValuesDTO.setFromdate(fromDate);
-                                    chartValuesDTO.setTodate(toDate);
-                                    chartValuesDTO.setPratyanterDashChartModels(pratyanterDashChartModels);
+                                    AntardashaValuesDTO antardashaValuesDTO =new AntardashaValuesDTO();
+                                    antardashaValuesDTO.setFromdate(fromDate);
+                                    antardashaValuesDTO.setTodate(toDate);
                                     ArrayList<AntardashaChartValuesDTO> antardashaChartValuesDTOArrayList=new ArrayList<>();
 
                                     for (int k=0;k<anterDashaChartValues.length();k++)
@@ -202,11 +248,11 @@ public class BasicChartFragment extends DialogFragment {
                                         antardashaChartValuesDTO.setAntardashaValues(values);
                                         antardashaChartValuesDTOArrayList.add(antardashaChartValuesDTO);
                                     }
-                                    chartValuesDTO.setAntardashaChartValuesArrayList(antardashaChartValuesDTOArrayList);
-                                    chartValuesDTOArrayList.add(chartValuesDTO);
+                                    antardashaValuesDTO.setAntardashaChartValuesArrayList(antardashaChartValuesDTOArrayList);
+                                    antardashaValuesDTOArrayList.add(antardashaValuesDTO);
 
                                 }
-                                chartValuesAdapter.notifyDataSetChanged();
+                                antarDashaValuesAdapter.notifyDataSetChanged();
                             progressDialog.dismiss();
 
 

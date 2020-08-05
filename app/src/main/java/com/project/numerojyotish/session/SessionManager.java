@@ -23,8 +23,7 @@ public class SessionManager {
     public static final String KEY_DOB = "dob";
     public static final String KEY_NAME = "name";
     public static final String KEY_GENDER = "gender";
-    public static final String KEY_FROMDATE= "fromdate";
-    public static final String KEY_TODATE = "todate";
+    public static final String KEY_YEAR= "year";
 
     public static final String KEY_RESPONSE = "response";
     public static final String KEY_ROLE = "role";
@@ -76,16 +75,14 @@ public class SessionManager {
 
     public HashMap<String, String> getFromToDate() {
         HashMap<String, String> user = new HashMap<>();
-        user.put(KEY_FROMDATE, pref.getString(KEY_FROMDATE, ""));
-        user.put(KEY_TODATE, pref.getString(KEY_TODATE, ""));
+        user.put(KEY_YEAR, pref.getString(KEY_YEAR, ""));
         return user;
     }
 
 
-    public void setFromToDate(String fromdate,String todate) {
+    public void setFromToDate(String year) {
 
-        editor.putString(KEY_FROMDATE, fromdate);
-        editor.putString(KEY_TODATE, todate);
+        editor.putString(KEY_YEAR, year);
 
         editor.commit();
     }

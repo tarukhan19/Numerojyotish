@@ -4,7 +4,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class ChartValuesDTO {
+public class AntardashaValuesDTO {
     String fromdate,todate;
     ArrayList<AntardashaChartValuesDTO> antardashaChartValuesArrayList;
     JSONArray pratyanterDashChartModels;

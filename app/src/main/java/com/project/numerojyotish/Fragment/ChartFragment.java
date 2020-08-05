@@ -38,7 +38,7 @@ import java.util.Locale;
  */
 public class ChartFragment extends Fragment {
 FragmentChartBinding binding;
-    String fromdate,todate;
+    int selectyear;
     int yy,mm,dd;
     private int mYear, mMonth, mDay;
     private SessionManager session;
@@ -57,66 +57,48 @@ FragmentChartBinding binding;
         View view = binding.getRoot();
         session = new SessionManager(getActivity().getApplicationContext());
 
-        binding.submitBTN.setOnClickListener(new View.OnClickListener() {
+        binding.submitBTN.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
-                fromdate=binding.fromdateTV.getText().toString();
-                todate=binding.todateTV.getText().toString();
-                if (fromdate.isEmpty())
+
+                if (String.valueOf(selectyear).isEmpty())
                 {
-                    openDialog("Enter valid From Date.","warning");
+                    openDialog("Enter valid Date.","warning");
                 }
-                else if (todate.isEmpty())
-                {
-                    openDialog("Enter valid To Date.","warning");
-                }
+
                 else
                 {
-                    session.setFromToDate(fromdate,todate);
-
+                    session.setFromToDate(String.valueOf(selectyear));
                     BasicChartFragment dialogFragment = new BasicChartFragment();
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
                     ft.addToBackStack(null);
                     dialogFragment.show(ft, "dialog");
-                }
+               }
 
 
             }
         });
 
-        binding.fromdateTV.setOnClickListener(new View.OnClickListener() {
+
+
+        binding.selectYearTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    showDateTimePicker("fromdate");
+                    showDateTimePicker();
                 }
                 catch (Exception e)
                 {}
             }
         });
 
-        binding.todateTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.fromdateTV.getText().toString().isEmpty())
-                {
-                    openDialog("First select from date.","warning");
-                }
-                else
-                {
-                    try {
-                        showDateTimePicker("todate");
-                    }
-                    catch (Exception e)
-                    {}
 
-                }
-            }
-        });
         return  view;
     }
+
 
     private void openDialog(String message, final String imagetype)
     {
@@ -167,7 +149,7 @@ FragmentChartBinding binding;
     }
 
 
-    private void showDateTimePicker(final String from)
+    private void showDateTimePicker()
     {
         Calendar mcurrentDate = Calendar.getInstance();
         mYear = mcurrentDate.get(Calendar.YEAR);
@@ -184,23 +166,22 @@ FragmentChartBinding binding;
                 String myFormat = "MM/dd/yyyy"; //Change as you need
 
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-
-                if(from.equalsIgnoreCase("todate"))
-                {
-                    binding.todateTV.setText(sdf.format(myCalendar.getTime()));
-
-                }
-
-                else if(from.equalsIgnoreCase("fromdate"))
-                {
-                    binding.fromdateTV.setText(sdf.format(myCalendar.getTime()));
-                    Log.e("fromdate",Calendar.YEAR+"");
-                    Log.e("fromdate",myCalendar.get(Calendar.YEAR)+"");
+//
+//                if(from.equalsIgnoreCase("todate"))
+//                {
+//                    binding.todateTV.setText(sdf.format(myCalendar.getTime()));
+//
+//                }
+//
+//                else if(from.equalsIgnoreCase("fromdate"))
+//                {
+                    binding.selectYearTV.setText(sdf.format(myCalendar.getTime()));
+                    selectyear=myCalendar.get(Calendar.YEAR);
                     yy = myCalendar.get(Calendar.YEAR);
                     mm = myCalendar.get(Calendar.MONTH);
                     dd = myCalendar.get(Calendar.DAY_OF_MONTH);
 
-                }
+    //            }
 
 
                 mDay = selectedday;
@@ -210,26 +191,26 @@ FragmentChartBinding binding;
         }, mYear, mMonth, mDay);
 
 
-
-        if (from.equalsIgnoreCase("fromdate"))
-        {
-            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
-
-        }
-        else if (from.equalsIgnoreCase("todate"))
-        {
-            Log.e("mYear-----",Calendar.YEAR+"");
-
-            myCalendar.set(Calendar.MONTH, mm);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dd);
-            myCalendar.set(Calendar.YEAR, yy );
-            mDatePicker.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
-            myCalendar.set(Calendar.MONTH, mm);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dd);
-            myCalendar.set(Calendar.YEAR, yy + 5);
-            mDatePicker.getDatePicker().setMaxDate(myCalendar.getTimeInMillis());
-
-        }
+//
+//        if (from.equalsIgnoreCase("fromdate"))
+//        {
+//            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+//
+//        }
+//        else if (from.equalsIgnoreCase("todate"))
+//        {
+//            Log.e("mYear-----",Calendar.YEAR+"");
+//
+//            myCalendar.set(Calendar.MONTH, mm);
+//            myCalendar.set(Calendar.DAY_OF_MONTH, dd);
+//            myCalendar.set(Calendar.YEAR, yy );
+//            mDatePicker.getDatePicker().setMinDate(myCalendar.getTimeInMillis());
+//            myCalendar.set(Calendar.MONTH, mm);
+//            myCalendar.set(Calendar.DAY_OF_MONTH, dd);
+//            myCalendar.set(Calendar.YEAR, yy + 5);
+//            mDatePicker.getDatePicker().setMaxDate(myCalendar.getTimeInMillis());
+//
+//        }
         mDatePicker.show();
     }
 }

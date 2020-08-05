@@ -7,7 +7,7 @@ public class EndPoints {
     public static final String CHANGE_PASSWORD = BASE_URL+"ChangePassword";
 
     public static final String LOAD_DATA = BASE_URL+"NumeroJyotish";
-    public static final String LOAD_CHART = BASE_URL+"Chart";
+    public static final String LOAD_CHART = BASE_URL+"ChartNew";
     public static final String LOAD_NAMEDATA = BASE_URL+"Name?name=";
 
 
