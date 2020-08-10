@@ -120,20 +120,44 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <com.project.numerojyotish.customFont.ButtonAirenRegular
-                android:id="@+id/submitBTN"
-                android:layout_width="150dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/gradient"
                 android:layout_marginTop="20dp"
+
+
+                >
+                <com.project.numerojyotish.customFont.ButtonAirenRegular
+                android:id="@+id/submitBTN"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient"
                 android:text="Submit"
+                android:layout_weight="0.5"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
                 />
-        </LinearLayout>
 
+                <com.project.numerojyotish.customFont.ButtonAirenRegular
+                    android:id="@+id/registrationBTN"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient"
+                    android:text="Registration"
+                    android:layout_weight="0.5"
+                    android:visibility="visible"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
 
 
 

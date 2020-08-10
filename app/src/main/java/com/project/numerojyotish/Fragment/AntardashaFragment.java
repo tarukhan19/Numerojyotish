@@ -55,12 +55,12 @@ public class AntardashaFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_antardasha, container, false);
         View view = binding.getRoot();
-
         initialize();
         return  view;
     }
 
-    private void initialize() {
+    private void initialize()
+    {
 
         sessionManager=  new SessionManager(getActivity().getApplicationContext());
         antardashaFragment = this;

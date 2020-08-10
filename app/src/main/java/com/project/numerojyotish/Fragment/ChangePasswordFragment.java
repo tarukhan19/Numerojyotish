@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -64,6 +65,13 @@ public class ChangePasswordFragment extends Fragment  implements ConnectivityRec
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_change_password, container, false);
         View view = binding.getRoot();
+
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        ImageView backIV = toolbar.findViewById(R.id.plusimage);
+        backIV.setVisibility(View.GONE);
+        toolbar_title.setText("Change Password");
+
         initialize();
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +120,10 @@ public class ChangePasswordFragment extends Fragment  implements ConnectivityRec
         session = new SessionManager(getActivity().getApplicationContext());
         progressDialog = new ProgressDialog(getActivity());
         requestQueue = Volley.newRequestQueue(getActivity());
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
+
     }
     private void checkConnection() {
         isConnected = ConnectivityReceiver.isConnected();

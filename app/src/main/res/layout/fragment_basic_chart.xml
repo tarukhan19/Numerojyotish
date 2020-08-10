@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lite_grey">
+        android:background="@color/colorPrimary">
 
         <include
             android:id="@+id/toolbar"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:visibility="visible"
+            android:visibility="gone"
 
             >
 
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/white"
                     android:background="@color/white"
-                    app:cardElevation="4dp"
+                    app:cardElevation="5dp"
                     android:layout_margin="5dp"
                     app:cardCornerRadius="5dp"
                     >
@@ -44,15 +44,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        >
 
                         <com.project.numerojyotish.customFont.TextViewBoldFont
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="@color/green"
+                            android:background="@color/gradientcentercolor"
                             android:gravity="center"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:text="Basic Chart: "
                             android:textColor="@color/white"
                             android:textSize="16sp" />
@@ -62,7 +62,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:background="@color/white"
                             android:clipToPadding="false"
                             android:padding="8dp"
                             android:scrollbars="vertical"
@@ -84,10 +83,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@color/green"
+                        android:background="@color/gradientcentercolor"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Antardasha Chart: "
+                        android:text="Dasha and Antardasha Chart: "
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -115,7 +114,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@color/green"
+                        android:background="@color/gradientcentercolor"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="Pratyantar Dasha Chart: "

@@ -254,6 +254,7 @@ public class BasicChartFragment extends DialogFragment {
                                 }
                                 antarDashaValuesAdapter.notifyDataSetChanged();
                             progressDialog.dismiss();
+                            binding.scrollview.setVisibility(View.VISIBLE);
 
 
 

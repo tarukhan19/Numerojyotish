@@ -3,6 +3,7 @@ package com.project.numerojyotish.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -56,6 +60,11 @@ FragmentNameDetailsBinding binding;
         progressDialog = new ProgressDialog(getActivity());
         requestQueue = Volley.newRequestQueue(getActivity());
 
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        ImageView backIV = toolbar.findViewById(R.id.plusimage);
+        backIV.setVisibility(View.GONE);
+        toolbar_title.setText("Name Details");
         binding.submitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +83,7 @@ FragmentNameDetailsBinding binding;
             }
         });
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
 
         return view;

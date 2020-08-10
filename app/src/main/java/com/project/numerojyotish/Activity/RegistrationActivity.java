@@ -1,8 +1,11 @@
 package com.project.numerojyotish.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -33,6 +36,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
+import com.project.numerojyotish.Fragment.RegistrationFragment;
 import com.project.numerojyotish.R;
 import com.project.numerojyotish.Utils.ConnectivityReceiver;
 import com.project.numerojyotish.Utils.EndPoints;
@@ -53,156 +57,40 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity implements  ConnectivityReceiver.ConnectivityReceiverListener {
 ActivityRegistrationBinding binding;
-    private ProgressDialog progressDialog;
-    private RequestQueue requestQueue;
-    private SessionManager session;
-    boolean isConnected;
-    private int mYear, mMonth, mDay;
 
-    String firstName,lastName,mobileNo,emailId,dateOfBirth="",dateOfMembExpDate="",gender="Male",password;
+    boolean isConnected;
+    ImageView backIV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
         initialize();
-        binding.loginBTN.setOnClickListener(new View.OnClickListener() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.frame_container, new RegistrationFragment()).commit();
+        backIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                HideKeyboard.hideKeyboard(RegistrationActivity.this);
-
-                submit();
+                Intent in7 = new Intent(RegistrationActivity.this, BasicInfoActivity.class);
+                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(in7);
+                overridePendingTransition(R.anim.trans_left_in,
+                        R.anim.trans_left_out);
             }
         });
 
-        binding.dobTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    HideKeyboard.hideKeyboard(RegistrationActivity.this);
-
-                    showDateTimePicker("dob");
-
-                }
-                catch (Exception e)
-                {}
-            }
-        });
-
-        binding.membExpDateTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    HideKeyboard.hideKeyboard(RegistrationActivity.this);
-
-                    showDateTimePicker("exp");
-
-                }
-                catch (Exception e)
-                {}
-            }
-        });
 
     }
 
-    private void showDateTimePicker(final String from)
-    {
-        Calendar mcurrentDate = Calendar.getInstance();
-        mYear = mcurrentDate.get(Calendar.YEAR);
-        mMonth = mcurrentDate.get(Calendar.MONTH);
-        mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-        final Calendar myCalendar = Calendar.getInstance();
-
-        DatePickerDialog mDatePicker = new DatePickerDialog(this,  AlertDialog.THEME_HOLO_LIGHT,new DatePickerDialog.OnDateSetListener() {
-            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-
-                myCalendar.set(Calendar.YEAR, selectedyear);
-                myCalendar.set(Calendar.MONTH, selectedmonth);
-                myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
-                String myFormat = "MM/dd/yyyy"; //Change as you need
-
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-
-                if (from.equalsIgnoreCase("dob"))
-                {
-                    binding.dobTV.setText(sdf.format(myCalendar.getTime()));
-
-                }
-                else
-                {
-                    binding.membExpDateTV.setText(sdf.format(myCalendar.getTime()));
-                }
-
-
-                mDay = selectedday;
-                mMonth = selectedmonth;
-                mYear = selectedyear;
-            }
-        }, mYear, mMonth, mDay);
-
-
-        //   mDatePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-
-        mDatePicker.show();
-    }
-
-    private void submit()
-    {
-        firstName=binding.firstNameET.getText().toString();
-        lastName=binding.lastNameET.getText().toString();
-        mobileNo = binding.mobileNoET.getText().toString();
-        emailId=binding.emailET.getText().toString();
-        dateOfBirth=binding.dobTV.getText().toString();
-        dateOfMembExpDate=binding.membExpDateTV.getText().toString();
-        password = binding.passwordET.getText().toString();
-        if (binding.maleRB.isChecked()) {
-            gender = "Male";
-        } else {
-            gender = "Female";
-        }
-        if (firstName.isEmpty())
-        {
-            openDialog("Enter valid First Name","warning");
-        }
-        else  if (lastName.isEmpty())
-        {
-            openDialog("Enter valid Last Name","warning");
-        }
-        else  if (mobileNo.isEmpty())
-        {
-            openDialog("Enter valid Mobile No","warning");
-        }
-        else  if (emailId.isEmpty())
-        {
-            openDialog("Enter valid Email ID","warning");
-        }
-        else  if (dateOfBirth.isEmpty())
-        {
-            openDialog("Enter valid Date of birth","warning");
-        }
-        else  if (dateOfMembExpDate.isEmpty())
-        {
-            openDialog("Enter valid Member Expiration Date","warning");
-        }
-        else if (password.isEmpty())
-        {
-            openDialog("Enter valid Password.","warning");
-        }
-        else
-        {
-            checkConnection();
-            if (isConnected)
-            {
-                login();
-
-            }
-            else
-            {
-                showSnack(isConnected);
-            }
-        }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent in7 = new Intent(RegistrationActivity.this, BasicInfoActivity.class);
+        in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in7);
+        overridePendingTransition(R.anim.trans_left_in,
+                R.anim.trans_left_out);
     }
 
     private void initialize()
@@ -214,9 +102,13 @@ ActivityRegistrationBinding binding;
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
-        session = new SessionManager(getApplicationContext());
-        progressDialog = new ProgressDialog(this);
-        requestQueue = Volley.newRequestQueue(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        backIV = toolbar.findViewById(R.id.plusimage);
+        toolbar_title.setText("Registration");
+
+
     }
 
 
@@ -270,137 +162,5 @@ ActivityRegistrationBinding binding;
         super.onDestroy();
     }
 
-    private void login()
-    {
-        progressDialog.setMessage("Loading Please Wait...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
 
-        JSONObject object=new JSONObject();
-
-        try {
-
-            object.put("firstName", firstName);
-            object.put("lastName",lastName);
-            object.put("gender",gender);
-            object.put("dob",dateOfBirth);
-            object.put("memberExpirationDate",dateOfMembExpDate);
-            object.put("mobileNo",mobileNo);
-            object.put("email",emailId);
-            object.put("password",password);
-
-
-
-
-        } catch (JSONException e) {
-            e.printStackTrace ( );
-        }
-        Log.e("jsonObject", ">>>>>" + object.toString());
-
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, EndPoints.REGISTRATION, object,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        Log.e("BILL_FETCHresponse", ">>>>>" + response);
-                        try {
-                            progressDialog.dismiss();
-                            JSONObject jsonObject = new JSONObject(String.valueOf(response));
-                            String message=jsonObject.getString("message");
-                            String status=jsonObject.getString("status");
-                            openDialog(message,status);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        if (null != error.networkResponse) {
-                            Toast.makeText(RegistrationActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                            Log.e("errorApplication", ">>>>>" + error);
-                        }
-                    }
-                }) {
-
-
-        }
-                ;
-
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
-
-    }
-
-    private void openDialog(String message, final String imagetype)
-    {
-        final Dialog dialog = new Dialog(this, R.style.CustomDialog);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.item_dialogbox);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.show();
-        TextView descriptionTV = dialog.findViewById(R.id.descriptionTV);
-        TextView titleTV = dialog.findViewById(R.id.titleTV);
-        ImageView imageView = dialog.findViewById(R.id.imageView);
-        Button okBtn = dialog.findViewById(R.id.okBtn);
-
-        descriptionTV.setText(message);
-        if (imagetype.equalsIgnoreCase("warning"))
-        {
-            imageView.setImageResource(R.drawable.warning);
-            titleTV.setText("Warning!");
-        }
-        else if (imagetype.equalsIgnoreCase("SUCCESS"))
-        {
-            imageView.setImageResource(R.drawable.success);
-            titleTV.setText("Success!");
-        }
-        else if (imagetype.equalsIgnoreCase("FAIL"))
-        {
-            imageView.setImageResource(R.drawable.sorry);
-            titleTV.setText("Failure!");
-        }
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                if (imagetype.equalsIgnoreCase("warning")  || imagetype.equalsIgnoreCase("FAIL"))
-                {
-                    dialog.dismiss();
-                }
-
-                else
-                {
-                    dialog.dismiss();
-
-                    binding.firstNameET.setText("");
-                    binding.lastNameET.setText("");
-                    binding.mobileNoET.setText("");
-                    binding.emailET.setText("");
-                    binding.dobTV.setText("");
-                    binding.membExpDateTV.setText("");
-                    binding.passwordET.setText("");
-                    binding.maleRB.setChecked(true);
-                    binding.femaleRB.setChecked(false);
-                    binding.firstNameET.requestFocus();
-
-                }
-
-
-            }
-        });
-    }
 }

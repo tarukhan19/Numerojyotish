@@ -4,7 +4,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/colorPrimary"
         >
 
 
@@ -133,7 +133,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 android:layout_marginTop="20dp"
                 />
 
@@ -149,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Name"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
 
                     android:textSize="16sp"
                     />
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
 
                     />
             </LinearLayout>
@@ -169,7 +169,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 android:layout_marginTop="10dp"
                 />
 
@@ -195,7 +195,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Birth Date"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         />
 
@@ -206,7 +206,7 @@
 
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
 
                         />
                 </LinearLayout>
@@ -214,7 +214,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/gray"
+                    android:background="@color/white"
                     />
 
                 <LinearLayout
@@ -230,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Gender"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         />
 
@@ -241,7 +241,7 @@
 
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
 
                         />
                 </LinearLayout>
@@ -251,7 +251,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 />
 
 
@@ -275,7 +275,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Lucky No."
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         />
 
@@ -286,7 +286,7 @@
 
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
 
                         />
                 </LinearLayout>
@@ -294,7 +294,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/gray"
+                    android:background="@color/white"
                     />
 
                 <LinearLayout
@@ -310,7 +310,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Zodiac Sign"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         />
 
@@ -321,7 +321,7 @@
 
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
 
                         />
                 </LinearLayout>
@@ -331,7 +331,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 />
 
 
@@ -356,7 +356,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Lucky Color"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         />
 
@@ -367,7 +367,7 @@
 
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
 
                         />
                 </LinearLayout>
@@ -375,7 +375,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/gray"
+                    android:background="@color/white"
                     />
 
                 <LinearLayout
@@ -391,7 +391,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Lucky Direction"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         />
 
@@ -402,7 +402,7 @@
 
                         android:textSize="14sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
 
                         />
                 </LinearLayout>
@@ -412,7 +412,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 />
 
             <LinearLayout
@@ -427,7 +427,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Remark"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     />
 
@@ -439,7 +439,7 @@
 
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
 
                     />
             </LinearLayout>
@@ -447,7 +447,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 android:layout_marginTop="10dp"
                 />
 

@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -61,6 +63,7 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
     private SessionManager session;
     boolean isConnected;
     private int mYear, mMonth, mDay;
+    Intent intent;
     String firstName, lastName, mobileNo, emailId, dateOfBirth = "", dateOfMembExpDate = "", gender = "Male", password, confpassword;
 
     public RegistrationFragment() {
@@ -74,13 +77,17 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false);
         View view = binding.getRoot();
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        ImageView backIV = toolbar.findViewById(R.id.plusimage);
+        backIV.setVisibility(View.GONE);
+        toolbar_title.setText("Registration");
+
         initialize();
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 HideKeyboard.hideKeyboard(getActivity());
-
                 submit();
             }
         });
@@ -209,6 +216,19 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+        }
+
+        intent=getActivity().getIntent();
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        if (intent.hasExtra("from"))
+        {
+            binding.toolbar.setVisibility(View.GONE);
+        }
+        else
+        {
+            binding.toolbar.setVisibility(View.VISIBLE);
         }
         session = new SessionManager(getActivity().getApplicationContext());
         progressDialog = new ProgressDialog(getActivity());

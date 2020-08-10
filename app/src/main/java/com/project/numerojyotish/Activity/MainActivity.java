@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         session = new SessionManager(getApplicationContext());
+        session.logoutUser();
         if (android.os.Build.VERSION.SDK_INT >= 21)
         {
             Window window = this.getWindow();
@@ -31,31 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Log.e("sessionlogin",session.isLoggedIn()+"");
         new Handler().postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
 
-                if (session.isLoggedIn())
-                {
-                    Intent intent=new Intent(MainActivity.this, BasicInfoActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.trans_left_in,
-                            R.anim.trans_left_out);
-                    finish();
-                }
-                else
-                {
+
                     Intent intent=new Intent(MainActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     overridePendingTransition(R.anim.trans_left_in,
                             R.anim.trans_left_out);
                     finish();
-                }
 
 
             }

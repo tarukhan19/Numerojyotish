@@ -66,7 +66,6 @@ public class HomePageActivity extends AppCompatActivity {
 
     public static int navItemIndex = 0;
     public static String CURRENT_TAG = TAG_HOME;
-    private String[] activityTitles;
     ImageView plusimage,logout;
     ActivityHomePageBinding binding;
     Fragment fragment;
@@ -115,7 +114,6 @@ public class HomePageActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         requestQueue = Volley.newRequestQueue(HomePageActivity.this);
         mHandler = new Handler();
-        activityTitles = getResources().getStringArray(R.array.smoothbottom_item_activity_titles);
 
         binding.tabs.setupWithViewPager(binding.viewpager);
 
@@ -321,7 +319,6 @@ public class HomePageActivity extends AppCompatActivity {
     private void loadHomeFragment()
     {
         // selecting appropriate nav menu item
-        setToolbarTitle();
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
@@ -352,7 +349,6 @@ public class HomePageActivity extends AppCompatActivity {
 
                 BasicInfoFragment basicInfoFragment = new BasicInfoFragment();
                 navItemIndex = 0;
-
                 CURRENT_TAG = TAG_HOME;
                 return basicInfoFragment;
 
@@ -362,7 +358,6 @@ public class HomePageActivity extends AppCompatActivity {
                 ChartFragment chartFragment = new ChartFragment();
                 navItemIndex = 1;
                 CURRENT_TAG = TAG_CHART;
-
                 return chartFragment;
 
 
@@ -371,7 +366,6 @@ public class HomePageActivity extends AppCompatActivity {
                 NameDetailsFragment nameDetailsFragment = new NameDetailsFragment();
                 navItemIndex = 2;
                 CURRENT_TAG = TAG_DETAIL;
-
                 return nameDetailsFragment;
 
             case 3:
@@ -398,7 +392,5 @@ public class HomePageActivity extends AppCompatActivity {
     }
 
 
-    private void setToolbarTitle() {
-        mTitle.setText(activityTitles[navItemIndex]);
-    }
+
 }

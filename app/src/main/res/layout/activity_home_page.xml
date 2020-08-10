@@ -7,21 +7,19 @@
 
     <RelativeLayout
 
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/lite_grey"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/home_toolbar" />
+
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
 
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
             android:background="@color/white"
             android:layout_marginBottom="@dimen/dimen_70dp"
 
@@ -32,18 +30,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/grey"
+
                 android:orientation="vertical">
 
 
                 <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/appbarLL"
+                    android:background="@drawable/gradient"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
 
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
+                    <include
+                        android:id="@+id/toolbar"
+                        layout="@layout/home_toolbar" />
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabs"
                         android:layout_width="match_parent"
@@ -80,8 +81,8 @@
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@android:color/white"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
-            app:itemBackground="@color/colorPrimary"
+            android:background="@drawable/gradient"
+            app:itemBackground="@drawable/gradient"
             android:foreground="?attr/selectableItemBackground"
             app:menu="@menu/menu_bottom" />
 

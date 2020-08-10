@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.project.numerojyotish.Api.ApiClass;
@@ -86,6 +87,7 @@ ActivityBasicInfoBinding binding;
                 }
 
 
+
             }
         });
 
@@ -103,6 +105,17 @@ ActivityBasicInfoBinding binding;
             }
         });
 
+        binding.registrationBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in7 = new Intent(BasicInfoActivity.this, RegistrationActivity.class);
+                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                in7.putExtra("from","activity");
+                startActivity(in7);
+                overridePendingTransition(R.anim.trans_left_in,
+                        R.anim.trans_left_out);
+            }
+        });
 
 
 
@@ -162,6 +175,17 @@ ActivityBasicInfoBinding binding;
         session = new SessionManager(getApplicationContext());
         apiClass = new ApiClass();
         basicInfoActivity = this;
+
+        if (session.getLoginDetail().get(SessionManager.KEY_ROLE).equalsIgnoreCase("Admin"))
+        {
+            binding.registrationBTN.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            binding.registrationBTN.setVisibility(View.GONE);
+
+        }
+
 
     }
     public static BasicInfoActivity getInstance() {

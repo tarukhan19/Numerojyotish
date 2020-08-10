@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
     app:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
     <ImageView
@@ -36,7 +35,7 @@
         android:src="@drawable/logout"
         android:layout_marginRight="10dp"
         android:layout_gravity="end"
-        android:visibility="visible"
+        android:visibility="gone"
         android:tint="@color/white"
         />
 

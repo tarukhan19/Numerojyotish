@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -56,6 +57,12 @@ FragmentChartBinding binding;
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chart, container, false);
         View view = binding.getRoot();
         session = new SessionManager(getActivity().getApplicationContext());
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        ImageView backIV = toolbar.findViewById(R.id.plusimage);
+        backIV.setVisibility(View.GONE);
+        toolbar_title.setText("Chart");
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         binding.submitBTN.setOnClickListener(new View.OnClickListener()
         {

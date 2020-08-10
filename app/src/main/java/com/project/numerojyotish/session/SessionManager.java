@@ -15,7 +15,6 @@ public class SessionManager {
     private static final String PREF_NAME = "salesformPref";
 
     // All Shared Preferences Keys
-    private static final String IS_LOGIN = "IsLoggedIn";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String IS_WORKING_HOURS_ADDED = "is_working_hours_added";
     private static final String KEY_USERID = "userid";
@@ -89,7 +88,6 @@ public class SessionManager {
 
 
     public void setLoginDetail(String role,String mobileNo,String imei) {
-        editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ROLE, role);
         editor.putString(KEY_MOBILE_NO, mobileNo);
         editor.putString(KEY_IMEI_NO, imei);
@@ -113,13 +111,6 @@ public class SessionManager {
     public void logoutUser() {
         editor.clear();
         editor.commit();
-    }
-
-
-
-
-    public boolean isLoggedIn() {
-        return pref.getBoolean(IS_LOGIN, false);
     }
 
 
