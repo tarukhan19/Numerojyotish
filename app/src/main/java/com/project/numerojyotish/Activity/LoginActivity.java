@@ -167,6 +167,9 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         progressDialog.setCancelable(false);
         progressDialog.show();
         String url = EndPoints.LOGIN + "?userId=" + mobileNo + "&password=" + password+"&IMEINO="+imeino;
+
+        Log.e("url",url);
+
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

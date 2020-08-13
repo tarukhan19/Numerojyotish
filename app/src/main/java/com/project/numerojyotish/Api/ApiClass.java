@@ -49,7 +49,10 @@ public class ApiClass implements ApiInterface
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+"&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+"&name="+session.getBasicDetails().get(SessionManager.KEY_NAME);
+        String url= EndPoints.LOAD_DATA+"?dob="+session.getBasicDetails().get(SessionManager.KEY_DOB)+
+                "&gender="+session.getBasicDetails().get(SessionManager.KEY_GENDER)+
+                "&name="+session.getBasicDetails().get(SessionManager.KEY_NAME)+
+                "&userName="+session.getLoginDetail().get(SessionManager.KEY_MOBILE_NO);
 
 
      //   String url= EndPoints.LOAD_DATA+"?dob="+"07/24/2010"+"&gender="+"Female"+"&name="+"tk";

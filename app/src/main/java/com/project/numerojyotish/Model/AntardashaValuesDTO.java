@@ -5,9 +5,25 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 public class AntardashaValuesDTO {
-    String fromdate,todate;
+    String fromdate,todate,dashaValue,anterDashaValue;
     ArrayList<AntardashaChartValuesDTO> antardashaChartValuesArrayList;
     JSONArray pratyanterDashChartModels;
+
+    public String getDashaValue() {
+        return dashaValue;
+    }
+
+    public void setDashaValue(String dashaValue) {
+        this.dashaValue = dashaValue;
+    }
+
+    public String getAnterDashaValue() {
+        return anterDashaValue;
+    }
+
+    public void setAnterDashaValue(String anterDashaValue) {
+        this.anterDashaValue = anterDashaValue;
+    }
 
     public JSONArray getPratyanterDashChartModels() {
         return pratyanterDashChartModels;

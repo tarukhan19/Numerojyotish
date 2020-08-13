@@ -46,15 +46,18 @@ public class AntarDashaValuesAdapter extends RecyclerView.Adapter<AntarDashaValu
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolderPollAdapter holder, final int position) {
-        holder.itemRowBinding.fromDateTV.setText(antardashaValuesDTOList.get(position).getFromdate());
-        holder.itemRowBinding.todateTV.setText(antardashaValuesDTOList.get(position).getTodate());
+    public void onBindViewHolder(@NonNull final ViewHolderPollAdapter holder, final int position)
+    {
+        holder.itemRowBinding.fromDateTV.setText("From Date: "+antardashaValuesDTOList.get(position).getFromdate());
+        holder.itemRowBinding.toDateTV.setText("To Date: "+antardashaValuesDTOList.get(position).getTodate());
+        holder.itemRowBinding.dashaTV.setText(antardashaValuesDTOList.get(position).getDashaValue());
+        holder.itemRowBinding.antardashaTV.setText(antardashaValuesDTOList.get(position).getAnterDashaValue());
+
         antardashaChartValuesAdapter = new AntardashaChartValuesAdapter(mcontex, antardashaValuesDTOList.get(position).getAntardashaChartValuesArrayList());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mcontex, 3);
         holder.itemRowBinding.chartValuesrecyclerview.setLayoutManager(mLayoutManager);
         holder.itemRowBinding.chartValuesrecyclerview.scheduleLayoutAnimation();
         holder.itemRowBinding.chartValuesrecyclerview.setNestedScrollingEnabled(false);
-
         DividerItemDecoration verticalDecoration = new DividerItemDecoration(holder.itemRowBinding.chartValuesrecyclerview.getContext(),
                 DividerItemDecoration.HORIZONTAL);
         Drawable verticalDivider = ContextCompat.getDrawable(mcontex, R.drawable.vertical_divider);
@@ -67,8 +70,6 @@ public class AntarDashaValuesAdapter extends RecyclerView.Adapter<AntarDashaValu
         horizontalDecoration.setDrawable(horizontalDivider);
         holder.itemRowBinding.chartValuesrecyclerview.addItemDecoration(horizontalDecoration);
         holder.itemRowBinding.chartValuesrecyclerview.setAdapter(antardashaChartValuesAdapter);
-
-
 
     }
 

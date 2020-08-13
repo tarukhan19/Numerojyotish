@@ -35,9 +35,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_margin="20dp"
+                    android:padding="10dp"
+                    android:background="@color/transwhite"
 
                     >
                     <com.project.numerojyotish.customFont.EditTextAirenRegular
@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="Gender*"
-                            android:textColor="@color/white"
+                            android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <RadioGroup
@@ -165,8 +165,8 @@
                                 android:checked="true"
                                 android:gravity="center"
                                 android:text="Male"
-                                android:buttonTint="@color/white"
-                                android:textColor="@color/white"
+                                android:buttonTint="@color/black"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
                             <RadioButton
@@ -176,8 +176,8 @@
                                 android:layout_marginTop="5dp"
                                 android:gravity="center"
                                 android:text="Female"
-                                android:buttonTint="@color/white"
-                                android:textColor="@color/white"
+                                android:buttonTint="@color/black"
+                                android:textColor="@color/black"
                                 android:textSize="14sp"
 
                                 />

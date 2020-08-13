@@ -49,6 +49,10 @@ ActivityBasicInfoBinding binding;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_basic_info);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().setBackgroundDrawableResource(R.drawable.imagebackground);
+
         initialize();
 
         binding.submitBTN.setOnClickListener(new View.OnClickListener() {
@@ -223,11 +227,7 @@ ActivityBasicInfoBinding binding;
                 mYear = selectedyear;
             }
         }, mYear, mMonth, mDay);
-
-
-     //   mDatePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+           // mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
 
         mDatePicker.show();
     }
@@ -258,16 +258,12 @@ ActivityBasicInfoBinding binding;
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-
-        // register connection status listener
         MyApplication.getInstance().setConnectivityListener(this);
     }
-    /**
-     * Callback will be triggered when there is change in
-     * network connection
-     */
+
     @Override
     public void onNetworkConnectionChanged(boolean isConnected)
     {

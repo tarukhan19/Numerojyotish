@@ -205,12 +205,19 @@ public class BasicChartFragment extends DialogFragment {
                                 JSONObject chartValuesjsonobj=pratyanterChartArray.getJSONObject(j);
                                 String fromDate=chartValuesjsonobj.getString("fromDate");
                                 String toDate=chartValuesjsonobj.getString("toDate");
+                                String dashaValue=chartValuesjsonobj.getString("dashaValue");
+                                String anterDashaValue=chartValuesjsonobj.getString("anterDashaValue");
+                                String pratyanterDashaValue=chartValuesjsonobj.getString("pratyanterDashaValue");
 
 
                                 JSONArray pratyantarDashaChartValues=chartValuesjsonobj.getJSONArray("pratyanterDashaChartValues");
                                 PratyantadashaChartModelsDTO pratyantadashaChartModelsDTO =new PratyantadashaChartModelsDTO();
                                 pratyantadashaChartModelsDTO.setFromDate(fromDate);
                                 pratyantadashaChartModelsDTO.setToDate(toDate);
+                                pratyantadashaChartModelsDTO.setDashaValue(dashaValue);
+                                pratyantadashaChartModelsDTO.setAnterDashaValue(anterDashaValue);
+                                pratyantadashaChartModelsDTO.setPratyanterDashaValue(pratyanterDashaValue);
+
                                 ArrayList<PratyantarDashaChartValuesDTO> pratyantarDashaChartValuesDTOArrayList=new ArrayList<>();
 
                                 for (int k=0;k<pratyantarDashaChartValues.length();k++)
@@ -232,11 +239,14 @@ public class BasicChartFragment extends DialogFragment {
                                     JSONObject chartValuesjsonobj=anterdashaChartArray.getJSONObject(j);
                                     String fromDate=chartValuesjsonobj.getString("fromDate");
                                     String toDate=chartValuesjsonobj.getString("toDate");
-
+                                    String dashaValue=chartValuesjsonobj.getString("dashaValue");
+                                    String anterDashaValue=chartValuesjsonobj.getString("anterDashaValue");
 
                                     JSONArray anterDashaChartValues=chartValuesjsonobj.getJSONArray("anterDashaChartValues");
                                     AntardashaValuesDTO antardashaValuesDTO =new AntardashaValuesDTO();
                                     antardashaValuesDTO.setFromdate(fromDate);
+                                    antardashaValuesDTO.setDashaValue(dashaValue);
+                                    antardashaValuesDTO.setAnterDashaValue(anterDashaValue);
                                     antardashaValuesDTO.setTodate(toDate);
                                     ArrayList<AntardashaChartValuesDTO> antardashaChartValuesDTOArrayList=new ArrayList<>();
 

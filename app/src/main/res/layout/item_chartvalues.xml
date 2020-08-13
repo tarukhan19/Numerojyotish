@@ -21,44 +21,51 @@
         android:orientation="vertical"
         >
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp"
             android:background="@color/red_inactive"
-           >
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-
+                android:padding="3dp"
                 android:weightSum="1"
                 >
 
-                <com.project.numerojyotish.customFont.TextViewBoldFont
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="From Date: "
-                    android:layout_weight="0.5"
-                    android:layout_gravity="start"
-                    android:gravity="start"
-                    android:textSize="16sp" />
                 <com.project.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/fromDateTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Rs. 14000"
+                    android:layout_weight="0.5"
                     android:layout_gravity="start"
                     android:gravity="start"
+                    android:textSize="10sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/toDateTV"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="start"
+                    android:gravity="end"
                     android:layout_weight="0.5"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="10sp" />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                />
 
 
             <LinearLayout
@@ -67,34 +74,72 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginTop="5dp"
+                android:padding="3dp"
                 android:weightSum="1"
                 >
 
-                <com.project.numerojyotish.customFont.TextViewBoldFont
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="To Date: "
-                    android:layout_weight="0.5"
-                    android:layout_gravity="start"
-                    android:gravity="start"
-                    android:textSize="16sp" />
                 <com.project.numerojyotish.customFont.TextViewAirenregular
-                    android:id="@+id/todateTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Rs. 14000"
-                    android:layout_gravity="start"
-                    android:gravity="start"
                     android:layout_weight="0.5"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="14sp" />
-
-
+                    android:layout_gravity="start"
+                    android:text="AntarDasha"
+                    android:gravity="start"
+                    android:textSize="10sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/antardashaTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="start"
+                    android:gravity="end"
+                    android:layout_weight="0.5"
+                    android:textSize="10sp" />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="3dp"
+                android:weightSum="1"
+                >
+
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="start"
+                    android:text="Dasha"
+                    android:gravity="start"
+                    android:textSize="10sp" />
+                <com.project.numerojyotish.customFont.TextViewAirenregular
+                    android:id="@+id/dashaTV"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="start"
+                    android:gravity="end"
+                    android:layout_weight="0.5"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+
         </LinearLayout>
+
 
 
         <androidx.recyclerview.widget.RecyclerView

@@ -47,8 +47,12 @@ public class PratyantadashaChartModelsAdapter extends RecyclerView.Adapter<Praty
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolderPollAdapter holder, final int position) {
-        holder.itemRowBinding.fromDateTV.setText(pratyantadashaChartModelsDTOList.get(position).getFromDate());
-        holder.itemRowBinding.todateTV.setText(pratyantadashaChartModelsDTOList.get(position).getToDate());
+        holder.itemRowBinding.fromDateTV.setText("From Date: "+pratyantadashaChartModelsDTOList.get(position).getFromDate());
+        holder.itemRowBinding.toDateTV.setText("To Date: "+pratyantadashaChartModelsDTOList.get(position).getToDate());
+        holder.itemRowBinding.dashaTV.setText(pratyantadashaChartModelsDTOList.get(position).getDashaValue());
+        holder.itemRowBinding.antardashaTV.setText(pratyantadashaChartModelsDTOList.get(position).getAnterDashaValue());
+        holder.itemRowBinding.pratyantardashaTV.setText(pratyantadashaChartModelsDTOList.get(position).getPratyanterDashaValue());
+
         pratyantarDashaChartValuesAdapter = new PratyantarDashaChartValuesAdapter(mcontex, pratyantadashaChartModelsDTOList.get(position).getPratyantadashaChartValuesDTOArrayList());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mcontex, 3);
         holder.itemRowBinding.pratyantardashachartvalueRV.setLayoutManager(mLayoutManager);
