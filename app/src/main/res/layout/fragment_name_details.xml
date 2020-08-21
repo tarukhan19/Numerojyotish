@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.project.numerojyotish.customFont.EditTextAirenRegular
+            <com.numerojyotish.customFont.EditTextAirenRegular
                 android:id="@+id/nameET"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -57,7 +57,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <com.project.numerojyotish.customFont.TextViewBoldFont
+                <com.numerojyotish.customFont.TextViewBoldFont
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@color/gradientcentercolor"
@@ -76,7 +76,7 @@
                     android:padding="8dp"
                     android:weightSum="1">
 
-                    <com.project.numerojyotish.customFont.TextViewBoldFont
+                    <com.numerojyotish.customFont.TextViewBoldFont
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -86,7 +86,7 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                    <com.numerojyotish.customFont.TextViewAirenregular
                         android:id="@+id/nameTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                     android:padding="8dp"
                     android:weightSum="1">
 
-                    <com.project.numerojyotish.customFont.TextViewBoldFont
+                    <com.numerojyotish.customFont.TextViewBoldFont
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -119,7 +119,7 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                    <com.numerojyotish.customFont.TextViewAirenregular
                         android:id="@+id/luckynoTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                     android:visibility="gone"
                     android:weightSum="1">
 
-                    <com.project.numerojyotish.customFont.TextViewBoldFont
+                    <com.numerojyotish.customFont.TextViewBoldFont
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -155,7 +155,7 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                    <com.numerojyotish.customFont.TextViewAirenregular
                         android:id="@+id/nameCharValueTV"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
         </LinearLayout>
         </ScrollView>
 
-        <com.project.numerojyotish.customFont.ButtonAirenRegular
+        <com.numerojyotish.customFont.ButtonAirenRegular
             android:id="@+id/submitBTN"
             android:layout_width="match_parent"
             android:layout_height="45dp"

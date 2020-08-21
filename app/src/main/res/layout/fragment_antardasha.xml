@@ -22,7 +22,7 @@
       android:background="@drawable/gradient"
 
       >
-   <com.project.numerojyotish.customFont.TextViewBoldFont
+   <com.numerojyotish.customFont.TextViewBoldFont
        android:id="@+id/fromdateTV"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
        android:text="From Date"
        android:textSize="12sp"
        />
-   <com.project.numerojyotish.customFont.TextViewBoldFont
+   <com.numerojyotish.customFont.TextViewBoldFont
        android:id="@+id/todateTV"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
        android:gravity="center"
        android:textSize="12sp"
        />
-   <com.project.numerojyotish.customFont.TextViewBoldFont
+   <com.numerojyotish.customFont.TextViewBoldFont
        android:id="@+id/dashaTV"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
        android:gravity="center"
        android:textSize="12sp"
        />
-   <com.project.numerojyotish.customFont.TextViewBoldFont
+   <com.numerojyotish.customFont.TextViewBoldFont
        android:id="@+id/antardashaTV"
        android:layout_width="0dp"
        android:layout_height="wrap_content"

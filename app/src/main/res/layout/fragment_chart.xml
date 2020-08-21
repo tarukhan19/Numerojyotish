@@ -23,7 +23,7 @@
            android:orientation="vertical"
            android:layout_below="@id/toolbar"
            tools:ignore="NotSibling">
-           <com.project.numerojyotish.customFont.TextViewAirenregular
+           <com.numerojyotish.customFont.TextViewAirenregular
                android:id="@+id/selectYearTV"
                android:layout_width="match_parent"
                android:layout_height="45dp"
@@ -42,7 +42,7 @@
                android:maxLines="1"
                />
 
-           <com.project.numerojyotish.customFont.TextViewAirenregular
+           <com.numerojyotish.customFont.TextViewAirenregular
                android:id="@+id/todateTV"
                android:layout_width="match_parent"
                android:layout_height="45dp"
@@ -63,7 +63,7 @@
 
        </LinearLayout>
 
-       <com.project.numerojyotish.customFont.ButtonAirenRegular
+       <com.numerojyotish.customFont.ButtonAirenRegular
            android:id="@+id/submitBTN"
            android:layout_width="match_parent"
            android:layout_height="45dp"

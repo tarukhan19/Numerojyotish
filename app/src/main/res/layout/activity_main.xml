@@ -18,7 +18,7 @@
         android:layout_marginTop="50dp"
 
         />
-<com.project.numerojyotish.customFont.TextViewBoldFont
+<com.numerojyotish.customFont.TextViewBoldFont
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Numero Jyotish"

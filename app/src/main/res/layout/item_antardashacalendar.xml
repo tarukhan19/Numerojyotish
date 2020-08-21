@@ -18,7 +18,7 @@
             android:gravity="center"
             android:weightSum="4"
             >
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.numerojyotish.customFont.TextViewAirenregular
                 android:id="@+id/fromdateTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:textSize="10sp"
                 />
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.numerojyotish.customFont.TextViewAirenregular
                 android:id="@+id/todateTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:textSize="10sp"
                 />
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.numerojyotish.customFont.TextViewAirenregular
                 android:id="@+id/dashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:textSize="10sp"
                 />
-            <com.project.numerojyotish.customFont.TextViewAirenregular
+            <com.numerojyotish.customFont.TextViewAirenregular
                 android:id="@+id/antardashaTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -52,7 +52,7 @@
                 android:layout_marginRight="20dp"
 
                 >
-                <com.project.numerojyotish.customFont.EditTextAirenRegular
+                <com.numerojyotish.customFont.EditTextAirenRegular
                     android:id="@+id/nameET"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -67,7 +67,7 @@
 
                     />
 
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/dobTV"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -90,7 +90,7 @@
                     android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
-                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                    <com.numerojyotish.customFont.TextViewAirenregular
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -140,7 +140,7 @@
 
 
                     >
-                    <com.project.numerojyotish.customFont.ButtonAirenRegular
+                    <com.numerojyotish.customFont.ButtonAirenRegular
                         android:id="@+id/submitBTN"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -152,7 +152,7 @@
                         android:layout_gravity="center"
                         />
 
-                    <com.project.numerojyotish.customFont.ButtonAirenRegular
+                    <com.numerojyotish.customFont.ButtonAirenRegular
                         android:id="@+id/registrationBTN"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"

@@ -40,7 +40,7 @@
                     android:background="@color/transwhite"
 
                     >
-                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                    <com.numerojyotish.customFont.EditTextAirenRegular
                         android:id="@+id/firstNameET"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -54,7 +54,7 @@
                         android:textSize="15sp"
 
                         />
-                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                    <com.numerojyotish.customFont.EditTextAirenRegular
                         android:id="@+id/lastNameET"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -72,7 +72,7 @@
 
 
 
-                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                    <com.numerojyotish.customFont.EditTextAirenRegular
                         android:id="@+id/mobileNoET"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -89,7 +89,7 @@
 
                         />
 
-                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                    <com.numerojyotish.customFont.EditTextAirenRegular
                         android:id="@+id/emailET"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -105,7 +105,7 @@
 
                         />
 
-                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                    <com.numerojyotish.customFont.TextViewAirenregular
                         android:id="@+id/dobTV"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -122,7 +122,7 @@
                         />
 
 
-                    <com.project.numerojyotish.customFont.TextViewAirenregular
+                    <com.numerojyotish.customFont.TextViewAirenregular
                         android:id="@+id/membExpDateTV"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -143,7 +143,7 @@
                         android:layout_marginLeft="10dp"
                         android:orientation="vertical">
 
-                        <com.project.numerojyotish.customFont.TextViewAirenregular
+                        <com.numerojyotish.customFont.TextViewAirenregular
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -186,7 +186,7 @@
                         </RadioGroup>
                     </LinearLayout>
 
-                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                    <com.numerojyotish.customFont.EditTextAirenRegular
                         android:id="@+id/passwordET"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -202,7 +202,7 @@
                         android:maxLines="1"
                         />
 
-                    <com.project.numerojyotish.customFont.EditTextAirenRegular
+                    <com.numerojyotish.customFont.EditTextAirenRegular
                         android:id="@+id/confpasswordET"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -227,7 +227,7 @@
             </LinearLayout>
         </ScrollView>
 
-        <com.project.numerojyotish.customFont.ButtonAirenRegular
+        <com.numerojyotish.customFont.ButtonAirenRegular
             android:id="@+id/loginBTN"
             android:layout_width="match_parent"
             android:layout_height="45dp"

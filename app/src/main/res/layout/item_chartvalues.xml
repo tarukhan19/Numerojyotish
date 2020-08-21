@@ -39,7 +39,7 @@
                 android:weightSum="1"
                 >
 
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/fromDateTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                     android:layout_gravity="start"
                     android:gravity="start"
                     android:textSize="10sp" />
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/toDateTV"
 
                     android:layout_width="0dp"
@@ -78,7 +78,7 @@
                 android:weightSum="1"
                 >
 
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -87,7 +87,7 @@
                     android:text="AntarDasha"
                     android:gravity="start"
                     android:textSize="10sp" />
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/antardashaTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 android:weightSum="1"
                 >
 
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -125,7 +125,7 @@
                     android:text="Dasha"
                     android:gravity="start"
                     android:textSize="10sp" />
-                <com.project.numerojyotish.customFont.TextViewAirenregular
+                <com.numerojyotish.customFont.TextViewAirenregular
                     android:id="@+id/dashaTV"
 
                     android:layout_width="0dp"

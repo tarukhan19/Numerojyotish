@@ -28,7 +28,7 @@
 <!--            />-->
 
 
-        <com.project.numerojyotish.customFont.TextViewBoldFont
+        <com.numerojyotish.customFont.TextViewBoldFont
             android:id="@+id/titleTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:textSize="20sp"
             />
 
-        <com.project.numerojyotish.customFont.TextViewAirenregular
+        <com.numerojyotish.customFont.TextViewAirenregular
             android:id="@+id/descriptionTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_marginTop="8dp"
             android:weightSum="1"
             >
-            <com.project.numerojyotish.customFont.ButtonAirenRegular
+            <com.numerojyotish.customFont.ButtonAirenRegular
                 android:id="@+id/yesBTN"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
@@ -76,7 +76,7 @@
                 android:text="Yes"
                 android:textSize="20sp"
                 />
-            <com.project.numerojyotish.customFont.ButtonAirenRegular
+            <com.numerojyotish.customFont.ButtonAirenRegular
                 android:id="@+id/noBtn"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
