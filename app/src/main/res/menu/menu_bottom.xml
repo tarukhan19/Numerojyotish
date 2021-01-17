@@ -17,12 +17,12 @@
         android:icon="@drawable/name"/>
     <item
         android:id="@+id/fourth_fragment"
-        android:title="Registration"
+        android:title="More"
         android:icon="@drawable/registration"/>
-    <item
-        android:id="@+id/fifth_fragment"
-        android:title="Change Password"
-        android:icon="@drawable/changepassword"/>
+<!--    <item-->
+<!--        android:id="@+id/fifth_fragment"-->
+<!--        android:title="Change Password"-->
+<!--        android:icon="@drawable/changepassword"/>-->
 
 
 

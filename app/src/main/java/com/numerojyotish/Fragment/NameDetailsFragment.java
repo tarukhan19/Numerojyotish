@@ -56,11 +56,7 @@ FragmentNameDetailsBinding binding;
         progressDialog = new ProgressDialog(getActivity());
         requestQueue = Volley.newRequestQueue(getActivity());
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        ImageView backIV = toolbar.findViewById(R.id.plusimage);
-        backIV.setVisibility(View.GONE);
-        toolbar_title.setText("Name Details");
+
         binding.submitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

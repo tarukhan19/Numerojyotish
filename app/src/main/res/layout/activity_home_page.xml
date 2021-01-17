@@ -32,7 +32,10 @@
                 android:background="@color/grey"
 
                 android:orientation="vertical">
+                <include
+                    android:id="@+id/toolbar"
 
+                    layout="@layout/home_toolbar" />
 
                 <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/appbarLL"
@@ -42,9 +45,7 @@
                     android:layout_height="wrap_content"
 
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-                    <include
-                        android:id="@+id/toolbar"
-                        layout="@layout/home_toolbar" />
+
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabs"
                         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.numerojyotish.Fragment;
+package com.numerojyotish.DialogFragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -46,7 +47,7 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChangePasswordFragment extends Fragment  implements ConnectivityReceiver.ConnectivityReceiverListener {
+public class ChangePasswordFragment extends DialogFragment implements ConnectivityReceiver.ConnectivityReceiverListener {
     FragmentChangePasswordBinding binding;
     private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
@@ -54,16 +55,19 @@ public class ChangePasswordFragment extends Fragment  implements ConnectivityRec
     boolean isConnected;
     private int mYear, mMonth, mDay;
     String oldpassword, password, confpassword;
+    Dialog cpdialog;
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_change_password, container, false);
-        View view = binding.getRoot();
-
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+    public Dialog onCreateDialog(final Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        cpdialog = super.onCreateDialog(savedInstanceState);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(cpdialog.getContext()), R.layout.fragment_change_password, null, false);
+        cpdialog.getWindow().getAttributes().windowAnimations = R.style.CustomDialogFragmentAnimation;
+        cpdialog.setContentView(binding.getRoot());
+        cpdialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        cpdialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        cpdialog.show();
+        Toolbar toolbar = (Toolbar) cpdialog.findViewById(R.id.toolbar);
         TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         ImageView backIV = toolbar.findViewById(R.id.plusimage);
         backIV.setVisibility(View.GONE);
@@ -79,7 +83,7 @@ public class ChangePasswordFragment extends Fragment  implements ConnectivityRec
                 submit();
             }
         });
-    return view;
+    return cpdialog;
     }
 
     private void submit() {
@@ -250,6 +254,7 @@ public class ChangePasswordFragment extends Fragment  implements ConnectivityRec
             public void onClick(View view) {
                 if (imagetype.equalsIgnoreCase("warning") || imagetype.equalsIgnoreCase("FAIL")) {
                     dialog.dismiss();
+                    cpdialog.dismiss();
                 } else {
                     dialog.dismiss();
 
@@ -260,6 +265,7 @@ public class ChangePasswordFragment extends Fragment  implements ConnectivityRec
                     Intent in7 = new Intent(getActivity(), LoginActivity.class);
                     in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(in7);
+                    cpdialog.dismiss();
                     getActivity().overridePendingTransition(R.anim.trans_left_in,
                             R.anim.trans_left_out);
 

@@ -10,7 +10,8 @@ public class EndPoints {
     public static final String LOAD_CHART = BASE_URL+"ChartNew";
     public static final String LOAD_NAMEDATA = BASE_URL+"Name?name=";
 
-  //  http://numerojyotish.com/NJAPI/api/ChartNew
+    public static final String LOAD_USER = BASE_URL+"ViewUsers";
+
 
 
 

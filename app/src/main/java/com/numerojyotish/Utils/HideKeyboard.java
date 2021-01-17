@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
-public class
-
-
-HideKeyboard {
+public class HideKeyboard {
     public static void hideKeyboard(Context mContext)
     {
         try {

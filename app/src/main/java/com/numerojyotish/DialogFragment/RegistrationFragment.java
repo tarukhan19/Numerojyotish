@@ -1,4 +1,4 @@
-package com.numerojyotish.Fragment;
+package com.numerojyotish.DialogFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -50,7 +51,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class RegistrationFragment extends Fragment implements ConnectivityReceiver.ConnectivityReceiverListener {
+public class RegistrationFragment extends DialogFragment implements ConnectivityReceiver.ConnectivityReceiverListener {
     FragmentRegistrationBinding binding;
     private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
@@ -59,25 +60,38 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
     private int mYear, mMonth, mDay;
     Intent intent;
     String firstName, lastName, mobileNo, emailId, dateOfBirth = "", dateOfMembExpDate = "", gender = "Male", password, confpassword;
-
+    Dialog dialogRF;
+    ImageView backIV;
     public RegistrationFragment() {
         // Required empty public constructor
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false);
-        View view = binding.getRoot();
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+    public Dialog onCreateDialog(final Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        dialogRF = super.onCreateDialog(savedInstanceState);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(dialogRF.getContext()),
+                R.layout.fragment_registration, null, false);
+        dialogRF.getWindow().getAttributes().windowAnimations = R.style.CustomDialogFragmentAnimation;
+        dialogRF.setContentView(binding.getRoot());
+        dialogRF.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogRF.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialogRF.show();
+        Toolbar toolbar = (Toolbar) dialogRF.findViewById(R.id.toolbar);
         TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        ImageView backIV = toolbar.findViewById(R.id.plusimage);
-        backIV.setVisibility(View.GONE);
+        backIV = toolbar.findViewById(R.id.plusimage);
         toolbar_title.setText("Registration");
 
         initialize();
+
+
+        backIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogRF.dismiss();
+            }
+        });
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +126,7 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
             }
         });
 
-        return view;
+        return dialogRF;
     }
 
     private void showDateTimePicker(final String from) {
@@ -147,16 +161,6 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
         }, mYear, mMonth, mDay);
 
 
-        //   mDatePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//        if (from.equalsIgnoreCase("dob"))
-//        {
-//            mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
-//        }
-//        else
-//        {
-//            mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
- //       }
         mDatePicker.show();
     }
 
@@ -203,7 +207,8 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
 
     }
 
-    private void initialize() {
+    private void initialize()
+    {
 
         if (android.os.Build.VERSION.SDK_INT >= 23) {
             Window window = getActivity().getWindow();
@@ -232,7 +237,6 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
 
     private void checkConnection() {
         isConnected = ConnectivityReceiver.isConnected();
-
     }
 
 
@@ -371,6 +375,7 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
             public void onClick(View view) {
                 if (imagetype.equalsIgnoreCase("warning") || imagetype.equalsIgnoreCase("FAIL")) {
                     dialog.dismiss();
+                    dialogRF.dismiss();
                 } else {
                     dialog.dismiss();
 
@@ -384,6 +389,8 @@ public class RegistrationFragment extends Fragment implements ConnectivityReceiv
                     binding.maleRB.setChecked(true);
                     binding.femaleRB.setChecked(false);
                     binding.firstNameET.requestFocus();
+
+                    dialogRF.dismiss();
 
                 }
 

@@ -31,12 +31,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.numerojyotish.Fragment.AntardashaFragment;
 import com.numerojyotish.Fragment.BasicInfoFragment;
-import com.numerojyotish.Fragment.ChangePasswordFragment;
 import com.numerojyotish.Fragment.ChartFragment;
 import com.numerojyotish.Fragment.DashaFragment;
+import com.numerojyotish.Fragment.MoreFragment;
 import com.numerojyotish.Fragment.NameDetailsFragment;
 import com.numerojyotish.Fragment.PartyantarDashaFragment;
-import com.numerojyotish.Fragment.RegistrationFragment;
 import com.numerojyotish.R;
 import com.numerojyotish.databinding.ActivityHomePageBinding;
 import com.numerojyotish.session.SessionManager;
@@ -54,8 +53,7 @@ public class HomePageActivity extends AppCompatActivity {
     private static final String TAG_HOME = "home";
     private static final String TAG_CHART = "chart";
     private static final String TAG_DETAIL = "detailfromname";
-    private static final String TAG_REGISTRATION = "registration";
-    private static final String TAG_CHANGEPASSWORD = "changepassword";
+    private static final String TAG_MORE = "more";
 
     public static int navItemIndex = 0;
     public static String CURRENT_TAG = TAG_HOME;
@@ -115,23 +113,11 @@ public class HomePageActivity extends AppCompatActivity {
 
         CURRENT_TAG = TAG_HOME;
         navItemIndex = 0;
+        mTitle.setText("Home");
         loadHomeFragment();
-        hideItem();
+      //  hideItem();
         binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
-    }
-    public void hideItem()
-    {
-        if (!sessionManager.getLoginDetail().get(SessionManager.KEY_ROLE).equalsIgnoreCase("Admin"))
-        {
-            binding.navigation.getMenu().removeItem(R.id.fourth_fragment);
-        }
-        else
-        {
-            binding.navigation.getMenu().removeItem(R.id.fifth_fragment);
-
-        }
 
     }
 
@@ -147,6 +133,8 @@ public class HomePageActivity extends AppCompatActivity {
                     binding.appbarLL.setVisibility(View.VISIBLE);
                     binding.viewpager.setVisibility(View.VISIBLE);
                     navItemIndex = 0;
+                    mTitle.setText("Home");
+
                     loadHomeFragment();
                     return true;
                 case R.id.second_fragment:
@@ -154,6 +142,8 @@ public class HomePageActivity extends AppCompatActivity {
                     binding.appbarLL.setVisibility(View.GONE);
                     binding.viewpager.setVisibility(View.GONE);
                     navItemIndex = 1;
+                    mTitle.setText("Chart");
+
                     loadHomeFragment();
                     return true;
                 case R.id.third_fragment:
@@ -161,23 +151,20 @@ public class HomePageActivity extends AppCompatActivity {
                     binding.appbarLL.setVisibility(View.GONE);
                     binding.viewpager.setVisibility(View.GONE);
                     navItemIndex = 2;
+                    mTitle.setText("Name Details");
+
                     loadHomeFragment();
                     return true;
                 case R.id.fourth_fragment:
-                    CURRENT_TAG = TAG_REGISTRATION;
+                    CURRENT_TAG = TAG_MORE;
                     binding.appbarLL.setVisibility(View.GONE);
                     binding.viewpager.setVisibility(View.GONE);
                     navItemIndex = 3;
+                    mTitle.setText("More");
+
                     loadHomeFragment();
                     return true;
 
-                case R.id.fifth_fragment:
-                    CURRENT_TAG = TAG_CHANGEPASSWORD;
-                    binding.appbarLL.setVisibility(View.GONE);
-                    binding.viewpager.setVisibility(View.GONE);
-                    navItemIndex = 4;
-                    loadHomeFragment();
-                    return true;
             }
             return false;
         }
@@ -363,17 +350,17 @@ public class HomePageActivity extends AppCompatActivity {
 
             case 3:
 
-                RegistrationFragment registrationFragment = new RegistrationFragment();
+                MoreFragment moreFragment = new MoreFragment();
                 navItemIndex = 3;
-                CURRENT_TAG = TAG_REGISTRATION;
-                return registrationFragment;
+                CURRENT_TAG = TAG_MORE;
+                return moreFragment;
 
-            case 4:
-
-                ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
-                navItemIndex = 4;
-                CURRENT_TAG = TAG_CHANGEPASSWORD;
-                return changePasswordFragment;
+//            case 4:
+//
+//                ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+//                navItemIndex = 4;
+//                CURRENT_TAG = TAG_CHANGEPASSWORD;
+//                return changePasswordFragment;
 
 
             default:

@@ -60,9 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 HideKeyboard.hideKeyboard(LoginActivity.this);
-
                 submit();
             }
         });
@@ -93,12 +91,10 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
             if (isConnected) {
                 imeino=getDeviceID();
                 login(imeino);
-
             } else {
                 showSnack(isConnected);
             }
         }
-
     }
 
     private void initialize() {
@@ -117,7 +113,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
     private void checkConnection() {
         isConnected = ConnectivityReceiver.isConnected();
-
     }
 
     private void showSnack(boolean isConnected) {
@@ -210,18 +205,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     }
                 }
         );
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("userId", mobileNo);
-//                params.put("password", password);
-//                /// params.put("DeviceId", "regId");
-//
-//
-//                return params;
-//            }
-//        };
+
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);

@@ -98,11 +98,8 @@ public class BasicChartFragment extends DialogFragment {
         progressDialog = new ProgressDialog(getActivity());
         requestQueue = Volley.newRequestQueue(getActivity());
 
-
-
-        if (dialog.isShowing()) {
-
-
+        if (dialog.isShowing())
+        {
             basicChartDTOArrayList = new ArrayList<>();
             adapter = new BasicChartAdapter(getActivity(), basicChartDTOArrayList);
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -155,15 +152,14 @@ public class BasicChartFragment extends DialogFragment {
             });
 
             submitData();
-
-
         }
         return dialog;
     }
 
 
 
-    private void submitData() {
+    private void submitData()
+    {
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();

@@ -3,6 +3,8 @@ package com.numerojyotish.Activity;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.numerojyotish.Api.ApiClass;
+import com.numerojyotish.DialogFragment.RegistrationFragment;
 import com.numerojyotish.R;
 import com.numerojyotish.Utils.ConnectivityReceiver;
 import com.numerojyotish.Utils.HideKeyboard;
@@ -110,12 +113,11 @@ ActivityBasicInfoBinding binding;
         binding.registrationBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in7 = new Intent(BasicInfoActivity.this, RegistrationActivity.class);
-                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                in7.putExtra("from","activity");
-                startActivity(in7);
-                overridePendingTransition(R.anim.trans_left_in,
-                        R.anim.trans_left_out);
+                RegistrationFragment dialogFragment = new RegistrationFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
+                ft.addToBackStack(null);
+                dialogFragment.show(ft, "dialog");
             }
         });
 
