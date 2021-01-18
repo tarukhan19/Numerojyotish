@@ -1,4 +1,4 @@
-package com.numerojyotish.Fragment;
+package com.numerojyotish.DialogFragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -84,7 +84,6 @@ Dialog dialogUL;
         backIV = toolbar.findViewById(R.id.plusimage);
         toolbar_title.setText("User List");
 
-
         loadData();
 
     }
@@ -95,7 +94,8 @@ Dialog dialogUL;
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url= EndPoints.LOAD_USER;
+        String url= EndPoints.LOAD_USER+"/mobileNo=9522335636";
+        Log.e("url",url);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -107,11 +107,7 @@ Dialog dialogUL;
 
                         try {
                             JSONObject obj = new JSONObject(response);
-
-
                             BasicInfoActivity.getInstance().runThread(response);
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -132,4 +128,5 @@ Dialog dialogUL;
         postRequest.setRetryPolicy(policy);
         requestQueue.add(postRequest);
     }
+
 }
