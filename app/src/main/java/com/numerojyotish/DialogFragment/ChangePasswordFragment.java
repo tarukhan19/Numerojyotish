@@ -70,8 +70,14 @@ public class ChangePasswordFragment extends DialogFragment implements Connectivi
         Toolbar toolbar = (Toolbar) cpdialog.findViewById(R.id.toolbar);
         TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         ImageView backIV = toolbar.findViewById(R.id.plusimage);
-        backIV.setVisibility(View.GONE);
         toolbar_title.setText("Change Password");
+
+        backIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cpdialog.dismiss();
+            }
+        });
 
         initialize();
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {

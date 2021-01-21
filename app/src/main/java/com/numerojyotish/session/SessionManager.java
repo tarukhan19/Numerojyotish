@@ -29,6 +29,42 @@ public class SessionManager {
     public static final String KEY_MOBILE_NO = "mobileno";
     public static final String KEY_IMEI_NO = "imei";
 
+    public static final String KEY_CUSTOMER_FNAME = "CFNAME";
+    public static final String KEY_CUSTOMER_LNAME = "CLNAME";
+    public static final String KEY_CUSTOMER_MOBILENO = "CMOBILENO";
+    public static final String KEY_CUSTOMER_EMAILID = "CEMAILID";
+    public static final String KEY_CUSTOMER_DOB = "CDOB";
+    public static final String KEY_CUSTOMER_EXPIRATIONDATE = "CEXPDATE";
+    public static final String KEY_CUSTOMER_GENDER = "CGENDER";
+
+
+    public HashMap<String, String> getCustomerDetails() {
+        HashMap<String, String> user = new HashMap<>();
+        user.put(KEY_CUSTOMER_FNAME, pref.getString(KEY_CUSTOMER_FNAME, ""));
+        user.put(KEY_CUSTOMER_LNAME, pref.getString(KEY_CUSTOMER_LNAME, ""));
+        user.put(KEY_CUSTOMER_MOBILENO, pref.getString(KEY_CUSTOMER_MOBILENO, ""));
+        user.put(KEY_CUSTOMER_EMAILID, pref.getString(KEY_CUSTOMER_EMAILID, ""));
+        user.put(KEY_CUSTOMER_DOB, pref.getString(KEY_CUSTOMER_DOB, ""));
+        user.put(KEY_CUSTOMER_EXPIRATIONDATE, pref.getString(KEY_CUSTOMER_EXPIRATIONDATE, ""));
+        user.put(KEY_CUSTOMER_GENDER, pref.getString(KEY_CUSTOMER_GENDER, ""));
+
+        return user;
+    }
+
+
+    public void setCustomerDetails(String fname,String lname, String mobileno, String emailid, String dob, String expdate,
+                                   String gender) {
+
+        editor.putString(KEY_CUSTOMER_FNAME, fname);
+        editor.putString(KEY_CUSTOMER_LNAME,lname );
+        editor.putString(KEY_CUSTOMER_MOBILENO, mobileno);
+        editor.putString(KEY_CUSTOMER_EMAILID, emailid);
+        editor.putString(KEY_CUSTOMER_DOB, dob);
+        editor.putString(KEY_CUSTOMER_EXPIRATIONDATE,expdate );
+        editor.putString(KEY_CUSTOMER_GENDER, gender);
+
+        editor.commit();
+    }
 
 
     // Constructor

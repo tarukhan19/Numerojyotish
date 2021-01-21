@@ -4,16 +4,16 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,61 +35,53 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
+import com.numerojyotish.Adapter.UserListAdapter;
+import com.numerojyotish.Model.UserListDTO;
 import com.numerojyotish.R;
 import com.numerojyotish.Utils.ConnectivityReceiver;
 import com.numerojyotish.Utils.EndPoints;
 import com.numerojyotish.Utils.HideKeyboard;
 import com.numerojyotish.Utils.MyApplication;
-import com.numerojyotish.databinding.FragmentRegistrationBinding;
+import com.numerojyotish.databinding.FragmentUpdateUserBinding;
+import com.numerojyotish.databinding.FragmentUserListBinding;
 import com.numerojyotish.session.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 
-public class RegistrationFragment extends DialogFragment implements ConnectivityReceiver.ConnectivityReceiverListener {
-    FragmentRegistrationBinding binding;
-    private ProgressDialog progressDialog;
-    private RequestQueue requestQueue;
-    private SessionManager session;
+public class UpdateUserFragment extends DialogFragment implements ConnectivityReceiver.ConnectivityReceiverListener{
+
+    FragmentUpdateUserBinding binding;
+    Dialog dialogUL;
+    ProgressDialog progressDialog;
+    RequestQueue requestQueue;
+    SessionManager sessionManager;
+    ImageView backIV;
+    String firstName,lastName,gender,dateOfBirth,dateOfMembExpDate,mobileNo,emailId;
     boolean isConnected;
     private int mYear, mMonth, mDay;
-    Intent intent;
-    String firstName, lastName, mobileNo, emailId, dateOfBirth = "", dateOfMembExpDate = "", gender = "Male", password, confpassword;
-    Dialog dialogRF;
-    ImageView backIV;
-    public RegistrationFragment() {
-        // Required empty public constructor
-    }
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
 
-
-    public Dialog onCreateDialog(final Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        dialogRF = super.onCreateDialog(savedInstanceState);
-        binding = DataBindingUtil.inflate(LayoutInflater.from(dialogRF.getContext()),
-                R.layout.fragment_registration, null, false);
-        dialogRF.getWindow().getAttributes().windowAnimations = R.style.CustomDialogFragmentAnimation;
-        dialogRF.setContentView(binding.getRoot());
-        dialogRF.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialogRF.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        dialogRF.show();
-        Toolbar toolbar = (Toolbar) dialogRF.findViewById(R.id.toolbar);
-        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        backIV = toolbar.findViewById(R.id.plusimage);
-        toolbar_title.setText("Registration");
+        dialogUL = super.onCreateDialog(savedInstanceState);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(dialogUL.getContext()), R.layout.fragment_update_user, null, false);
+        dialogUL.getWindow().getAttributes().windowAnimations = R.style.CustomDialogFragmentAnimation;
+        dialogUL.setContentView(binding.getRoot());
+        dialogUL.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogUL.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialogUL.show();
 
         initialize();
-
 
         backIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogRF.dismiss();
+                dialogUL.dismiss();
             }
         });
         binding.loginBTN.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +118,47 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
             }
         });
 
-        return dialogRF;
+        return dialogUL;
+    }
+
+    private void initialize() {
+
+        requestQueue = Volley.newRequestQueue(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
+        sessionManager = new SessionManager(getActivity().getApplicationContext());
+
+        Toolbar toolbar = (Toolbar) dialogUL.findViewById(R.id.toolbar);
+        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        backIV = toolbar.findViewById(R.id.plusimage);
+        toolbar_title.setText("User Update");
+
+        firstName = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_FNAME);
+        lastName = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_LNAME);
+        gender = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_GENDER);
+        dateOfBirth = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_DOB);
+        dateOfMembExpDate = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_EXPIRATIONDATE);
+        mobileNo = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_MOBILENO);
+        emailId = sessionManager.getCustomerDetails().get(SessionManager.KEY_CUSTOMER_EMAILID);
+
+        if (gender.equalsIgnoreCase("Male"))
+        {
+            binding.maleRB.setChecked(true);
+        }
+        else
+        {
+            binding.femaleRB.setChecked(true);
+
+        }
+
+        binding.firstNameET.setText(firstName);
+        binding.lastNameET.setText(lastName);
+        binding.dobTV.setText(dateOfBirth);
+        binding.membExpDateTV.setText(dateOfMembExpDate);
+        binding.mobileNoET.setText(mobileNo);
+        binding.emailET.setText(emailId);
+
+
+
     }
 
     private void showDateTimePicker(final String from) {
@@ -171,8 +203,7 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
         emailId = binding.emailET.getText().toString();
         dateOfBirth = binding.dobTV.getText().toString();
         dateOfMembExpDate = binding.membExpDateTV.getText().toString();
-        password = binding.passwordET.getText().toString();
-        confpassword = binding.confpasswordET.getText().toString();
+
 
         if (binding.maleRB.isChecked()) {
             gender = "Male";
@@ -191,11 +222,7 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
             openDialog("Enter valid Date of birth", "warning");
         } else if (dateOfMembExpDate.isEmpty()) {
             openDialog("Enter valid Member Expiration Date", "warning");
-        } else if (password.isEmpty()) {
-            openDialog("Enter valid Password.", "warning");
-        } else if (!confpassword.equals(password)) {
-            openDialog("Password doesn't match", "warning");
-        } else {
+        }  else {
             checkConnection();
             if (isConnected) {
                 login();
@@ -207,78 +234,7 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
 
     }
 
-    private void initialize()
-    {
 
-        if (android.os.Build.VERSION.SDK_INT >= 23) {
-            Window window = getActivity().getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
-        }
-
-        intent=getActivity().getIntent();
-
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        if (intent.hasExtra("from"))
-        {
-            binding.toolbar.setVisibility(View.GONE);
-        }
-        else
-        {
-            binding.toolbar.setVisibility(View.VISIBLE);
-        }
-        session = new SessionManager(getActivity().getApplicationContext());
-        progressDialog = new ProgressDialog(getActivity());
-        requestQueue = Volley.newRequestQueue(getActivity());
-    }
-
-
-    private void checkConnection() {
-        isConnected = ConnectivityReceiver.isConnected();
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // register connection status listener
-        MyApplication.getInstance().setConnectivityListener(this);
-    }
-
-    private void showSnack(boolean isConnected) {
-        String message;
-        int color;
-        if (isConnected) {
-            message = "Connected to Internet";
-            color = Color.WHITE;
-        } else {
-            message = "Not connected to internet";
-            color = Color.RED;
-        }
-
-        Snackbar snackbar = Snackbar
-                .make(getActivity().findViewById(R.id.linearlayout), message, Snackbar.LENGTH_LONG);
-
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
-        textView.setTextColor(color);
-        snackbar.show();
-    }
-
-    @Override
-    public void onNetworkConnectionChanged(boolean isConnected) {
-        this.isConnected = isConnected;
-        showSnack(isConnected);
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 
     private void login() {
         progressDialog.setMessage("Loading Please Wait...");
@@ -288,7 +244,6 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
         JSONObject object = new JSONObject();
 
         try {
-
             object.put("firstName", firstName);
             object.put("lastName", lastName);
             object.put("gender", gender);
@@ -296,8 +251,8 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
             object.put("memberExpirationDate", dateOfMembExpDate);
             object.put("mobileNo", mobileNo);
             object.put("email", emailId);
-            object.put("password", password);
-            object.put("isUpdate", "false");
+            object.put("password", "");
+            object.put("isUpdate", "true");
 
 
 
@@ -317,6 +272,11 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
                             JSONObject jsonObject = new JSONObject(String.valueOf(response));
                             String message = jsonObject.getString("message");
                             String status = jsonObject.getString("status");
+                            if (!status.equalsIgnoreCase("FAIL"))
+                            {
+                                UserListAdapter.getInstance().runThread(firstName,lastName,gender,dateOfBirth,dateOfMembExpDate,mobileNo,emailId);
+
+                            }
                             openDialog(message, status);
 
                         } catch (JSONException e) {
@@ -377,22 +337,11 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
             public void onClick(View view) {
                 if (imagetype.equalsIgnoreCase("warning") || imagetype.equalsIgnoreCase("FAIL")) {
                     dialog.dismiss();
-                    dialogRF.dismiss();
+                    dialogUL.dismiss();
                 } else {
                     dialog.dismiss();
 
-                    binding.firstNameET.setText("");
-                    binding.lastNameET.setText("");
-                    binding.mobileNoET.setText("");
-                    binding.emailET.setText("");
-                    binding.dobTV.setText("");
-                    binding.membExpDateTV.setText("");
-                    binding.passwordET.setText("");
-                    binding.maleRB.setChecked(true);
-                    binding.femaleRB.setChecked(false);
-                    binding.firstNameET.requestFocus();
 
-                    dialogRF.dismiss();
 
                 }
 
@@ -400,4 +349,51 @@ public class RegistrationFragment extends DialogFragment implements Connectivity
             }
         });
     }
+
+
+    private void checkConnection() {
+        isConnected = ConnectivityReceiver.isConnected();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
+    private void showSnack(boolean isConnected) {
+        String message;
+        int color;
+        if (isConnected) {
+            message = "Connected to Internet";
+            color = Color.WHITE;
+        } else {
+            message = "Not connected to internet";
+            color = Color.RED;
+        }
+
+        Snackbar snackbar = Snackbar
+                .make(getActivity().findViewById(R.id.linearlayout), message, Snackbar.LENGTH_LONG);
+
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+        textView.setTextColor(color);
+        snackbar.show();
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        this.isConnected = isConnected;
+        showSnack(isConnected);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
 }

@@ -8,6 +8,8 @@
         app:cardCornerRadius="5dp"
         android:elevation="5dp"
         app:cardElevation="5dp"
+        android:layout_margin="10dp"
+        android:padding="@dimen/dimen_5dp"
         android:background="@color/white"
         >
 
@@ -117,7 +119,7 @@
                     android:text="Date of Birth: "
                     />
                 <com.numerojyotish.customFont.TextViewAirenregular
-                    android:id="@+id/gstnoTV"
+                    android:id="@+id/dobTV"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:textColor="@color/colorPrimary"
