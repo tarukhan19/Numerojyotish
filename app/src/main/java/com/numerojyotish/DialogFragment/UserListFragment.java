@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.numerojyotish.Activity.BasicInfoActivity;
+import com.numerojyotish.Model.UserListDTO;
 import com.numerojyotish.R;
 import com.numerojyotish.Utils.ConnectivityReceiver;
 import com.numerojyotish.Utils.EndPoints;
@@ -34,8 +35,11 @@ import com.numerojyotish.Utils.HideKeyboard;
 import com.numerojyotish.databinding.FragmentUserListBinding;
 import com.numerojyotish.session.SessionManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class UserListFragment extends DialogFragment  {
@@ -46,6 +50,7 @@ Dialog dialogUL;
     RequestQueue requestQueue;
     SessionManager sessionManager;
     ImageView backIV;
+    ArrayList<UserListDTO> userListDTOArrayList;
     public Dialog onCreateDialog(final Bundle savedInstanceState)
     {
 
@@ -66,10 +71,6 @@ Dialog dialogUL;
             }
         });
 
-
-
-
-
         return dialogUL;
     }
 
@@ -84,6 +85,8 @@ Dialog dialogUL;
         backIV = toolbar.findViewById(R.id.plusimage);
         toolbar_title.setText("User List");
 
+        userListDTOArrayList=new ArrayList<>();
+
         loadData();
 
     }
@@ -94,7 +97,7 @@ Dialog dialogUL;
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        String url= EndPoints.LOAD_USER+"/mobileNo=9522335636";
+        String url= EndPoints.LOAD_USER;
         Log.e("url",url);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST,url,
@@ -107,7 +110,33 @@ Dialog dialogUL;
 
                         try {
                             JSONObject obj = new JSONObject(response);
-                            BasicInfoActivity.getInstance().runThread(response);
+                            JSONArray registeredUser=obj.getJSONArray("registerUsers");
+                            for (int i=0;i<registeredUser.length();i++)
+                            {
+                                JSONObject jsonObject=registeredUser.getJSONObject(i);
+                                String firstName=  jsonObject.getString("firstName");
+                                String lastName=  jsonObject.getString("lastName");
+                                String gender=  jsonObject.getString("gender");
+                                String dob=  jsonObject.getString("dob");
+                                String memberExpirationDate=  jsonObject.getString("memberExpirationDate");
+                                String mobileNo=  jsonObject.getString("mobileNo");
+                                String email=  jsonObject.getString("email");
+
+                                UserListDTO userListDTO=new UserListDTO();
+                                userListDTO.setFirstname(firstName);
+                                userListDTO.setLastname(lastName);
+                                userListDTO.setGender(gender);
+                                userListDTO.setDateofbirth(dob);
+                                userListDTO.setExpirydate(memberExpirationDate);
+                                userListDTO.setMobileno(mobileNo);
+                                userListDTO.setEmailid(email);
+                                userListDTOArrayList.add(userListDTO);
+
+
+                            }
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

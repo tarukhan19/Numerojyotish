@@ -43,6 +43,7 @@ public class ApiClass implements ApiInterface
                 "&name="+session.getBasicDetails().get(SessionManager.KEY_NAME)+
                 "&userName="+session.getLoginDetail().get(SessionManager.KEY_MOBILE_NO);
 
+        Log.e("url", url + "");
 
      //   String url= EndPoints.LOAD_DATA+"?dob="+"07/24/2010"+"&gender="+"Female"+"&name="+"tk";
 
