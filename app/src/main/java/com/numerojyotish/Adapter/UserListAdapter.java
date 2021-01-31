@@ -72,7 +72,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
         holder.itemRowBinding.dobTV.setText(userListDTOList.get(position).getDateofbirth());
 
 
-        binding.editcustomerTV.setOnClickListener(new View.OnClickListener() {
+        holder.itemRowBinding.editcustomerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pos=position;
