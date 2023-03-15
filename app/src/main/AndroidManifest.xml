@@ -28,27 +28,34 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name="com.numerojyotish.Activity.ForgetPasswordActivity"
+        <activity
+            android:name="com.numerojyotish.Activity.ForgetPasswordActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            >
+        </activity>
         <activity
             android:name="com.numerojyotish.Activity.HomePageActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.numerojyotish.Activity.BasicInfoActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.numerojyotish.Activity.LoginActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.numerojyotish.Activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
