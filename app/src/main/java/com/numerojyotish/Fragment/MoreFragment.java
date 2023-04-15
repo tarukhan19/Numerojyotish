@@ -1,6 +1,7 @@
 package com.numerojyotish.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.numerojyotish.Activity.DownloadPdfActivity;
 import com.numerojyotish.DialogFragment.ChangePasswordFragment;
 import com.numerojyotish.DialogFragment.RegistrationFragment;
 import com.numerojyotish.DialogFragment.UserListFragment;
@@ -59,6 +61,14 @@ FragmentMoreBinding binding;
             }
         });
 
+        binding.downloadpdfCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in7 = new Intent(requireActivity(), DownloadPdfActivity.class);
+                in7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(in7);
+            }
+        });
         binding.userlistCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

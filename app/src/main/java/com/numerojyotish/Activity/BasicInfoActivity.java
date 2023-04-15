@@ -122,7 +122,6 @@ ActivityBasicInfoBinding binding;
         });
 
 
-
     }
     private void openDialog(String message, final String imagetype)
     {
@@ -187,7 +186,6 @@ ActivityBasicInfoBinding binding;
         else
         {
             binding.registrationBTN.setVisibility(View.GONE);
-
         }
 
 

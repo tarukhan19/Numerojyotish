@@ -12,6 +12,7 @@ public class EndPoints {
 
     public static final String LOAD_USER = BASE_URL+"ViewUsers";
 
+    public static final String DOWNLOAD_PDF = BASE_URL+"DownloadPDF";
 
 
 
