@@ -32,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.numerojyotish.Fragment.AntardashaFragment;
 import com.numerojyotish.Fragment.BasicInfoFragment;
 import com.numerojyotish.Fragment.ChartFragment;
+import com.numerojyotish.Fragment.DailyDashaFragment;
 import com.numerojyotish.Fragment.DashaFragment;
 import com.numerojyotish.Fragment.MoreFragment;
 import com.numerojyotish.Fragment.NameDetailsFragment;
@@ -254,6 +255,15 @@ public class HomePageActivity extends AppCompatActivity {
         tabFour.setTextSize(15);
         binding.tabs.getTabAt(3).setCustomView(tabFour);
 
+        TextView tabFive = (TextView)
+                LayoutInflater.from(this).inflate(R.layout.custom_tab, binding.tabs, false);
+        tabFive.setText("Daily Dasha");
+        tabFive.setTextColor(getResources().getColorStateList(R.drawable.selector_textview));
+        tabFive.setTextSize(15);
+        binding.tabs.getTabAt(4).setCustomView(tabFive);
+
+
+
 
     }
 
@@ -264,6 +274,8 @@ public class HomePageActivity extends AppCompatActivity {
         adapter.addFragment(new DashaFragment(), "Dasha");
         adapter.addFragment(new AntardashaFragment(), "Antardasha");
         adapter.addFragment(new PartyantarDashaFragment(), "Partyantar Dasha");
+        adapter.addFragment(new DailyDashaFragment(), "Daily Dasha");
+
         viewPager.setAdapter(adapter);
     }
 

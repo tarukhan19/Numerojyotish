@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Fragment.DailyDashaFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="4"
+            android:background="@drawable/gradient"
+
+            >
+            <com.numerojyotish.customFont.TextViewBoldFont
+                android:id="@+id/fromdateTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Date"
+                android:textSize="12sp"
+                />
+            <com.numerojyotish.customFont.TextViewBoldFont
+                android:id="@+id/todateTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="Day"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="12sp"
+                />
+
+            <com.numerojyotish.customFont.TextViewBoldFont
+                android:id="@+id/partanyantardashaTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="Partyantar \nDasha"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="12sp"
+                />
+
+            <com.numerojyotish.customFont.TextViewBoldFont
+                android:id="@+id/dailydashaTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="Daily Dasha"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:background="@color/white"
+
+            android:visibility="visible" />
+    </LinearLayout>
+</layout>
